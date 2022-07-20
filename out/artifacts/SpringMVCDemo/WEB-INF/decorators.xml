@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<decorators defaultdir="/WEB-INF/views/layouts">
+    <decorator name="web" page="index.jsp">
+        <pattern>/home/*</pattern>
+    </decorator>
+
+    <decorator name="admin" page="admin.jsp">
+        <pattern>/admin/*</pattern>
+    </decorator>
+
+</decorators>
