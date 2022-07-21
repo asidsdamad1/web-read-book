@@ -50,6 +50,34 @@ public class BookDto extends BaseObjectDto{
         }
     }
 
+    public BookDto(Book entity, RatingDto ratingDto,  boolean simple) {
+        if(entity != null) {
+            this.id = entity.getBookId();
+            this.name = entity.getBookName();
+            this.description = entity.getDescription();
+            this.views = entity.getViews();
+            this.upvote = entity.getUpvote();
+            this.downvote = entity.getDownvote();
+            this.pdf = entity.getPdf();
+            this.img = entity.getImg();
+            this.star = ratingDto.SolveStar();
+            if(entity.getCategory() !=  null) {
+                this.category = new CategoryDto(entity.getCategory(), true);
+            }
+            if(entity.getPublishingHouse() !=  null) {
+                this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), true);
+            }
+            if(simple) {
+                if (entity.getBookAuthors() != null && entity.getBookAuthors().size() > 0) {
+                    this.bookAuthorDtos = new ArrayList<>();
+                    for (BookAuthor item : entity.getBookAuthors()) {
+                        this.bookAuthorDtos.add(new BookAuthorDto(item));
+                    }
+                }
+            }
+        }
+    }
+
 
     public String getName() {
         return name;

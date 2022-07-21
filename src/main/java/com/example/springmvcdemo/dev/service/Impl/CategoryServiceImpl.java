@@ -58,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
             entity = catRepo.save(entity);
 
             if(entity != null ) {
-                return new CategoryDto(entity);
+                return new CategoryDto(entity, true);
             }
         }
         return null;

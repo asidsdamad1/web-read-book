@@ -30,7 +30,7 @@ public class Book {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "publishingHourseId")
+    @JoinColumn(name = "publishingHouseId")
     private PublishingHouse publishingHouse;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
