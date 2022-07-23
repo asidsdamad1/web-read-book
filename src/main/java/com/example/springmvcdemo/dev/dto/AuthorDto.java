@@ -19,11 +19,11 @@ public class AuthorDto extends BaseObjectDto {
 
     public AuthorDto(Author entity, boolean simple) {
         if(entity != null) {
-            this.id = entity.getAuthorId();
-            this.name = entity.getAuthorName();
+            this.id = entity.getId();
+            this.name = entity.getName();
             this.description = entity.getDescription();
-            this.email = entity.getAuthorEmail();
-            this.address = entity.getAuthorAddress();
+            this.email = entity.getEmail();
+            this.address = entity.getAddress();
             if(simple) {
                 if(entity.getListBook() != null && entity.getListBook().size() >0) {
                     this.bookAuthors = new ArrayList<BookAuthorDto>();

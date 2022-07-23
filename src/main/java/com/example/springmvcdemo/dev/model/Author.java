@@ -10,15 +10,15 @@ public class Author {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long authorId;
+    private long id;
     @Column(name = "name")
-    private String authorName;
+    private String name;
     @Column(name = "description")
     private String description;
     @Column(name = "email")
-    private String authorEmail;
+    private String email;
     @Column(name = "address")
-    private String authorAddress;
+    private String address;
 
     @OneToMany(mappedBy = "author")
     private List<BookAuthor> listBook;
@@ -27,45 +27,42 @@ public class Author {
 
     }
 
-    public Author(long authorId, String authorName, String description, String authorEmail, String authorAddress, List<BookAuthor> listBook) {
-        this.authorId = authorId;
-        this.authorName = authorName;
+    public Author(long id, String name, String description, String email, String address, List<BookAuthor> listBook) {
+        this.id = id;
+        this.name = name;
         this.description = description;
-        this.authorEmail = authorEmail;
-        this.authorAddress = authorAddress;
+        this.email = email;
+        this.address = address;
         this.listBook = listBook;
     }
 
-    public String getAuthorEmail() {
-        return authorEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAuthorEmail(String authorEmail) {
-        this.authorEmail = authorEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getAuthorAddress() {
-        return authorAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAuthorAddress(String authorAddress) {
-        this.authorAddress = authorAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public long getAuthorId() {
-        return authorId;
+    public long getId() {
+        return id;
     }
 
-    public void setAuthorId(long authorId) {
-        this.authorId = authorId;
+
+    public String getName() {
+        return name;
     }
 
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

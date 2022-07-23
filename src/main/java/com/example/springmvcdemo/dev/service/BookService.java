@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface BookService {
-    List<Book> getAll();
+    List<BookDto> getAll();
 
     BookDto saveOrUpdate(BookDto dto, Long id);
 

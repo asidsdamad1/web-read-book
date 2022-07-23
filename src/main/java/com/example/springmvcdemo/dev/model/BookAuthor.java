@@ -18,7 +18,7 @@ public class BookAuthor {
     @Id
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "authorId")
+    @JoinColumn(name = "id")
     private Author author;
 
     @Column(name = "role")

@@ -8,9 +8,9 @@ public class Role {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roleId;
+    private long id;
     @Column(name = "name")
-    private String username;
+    private String name;
 
     @OneToOne(mappedBy = "role")
     private User user;
@@ -18,26 +18,26 @@ public class Role {
     public Role() {
     }
 
-    public Role(int roleId, String username, User user) {
-        this.roleId = roleId;
-        this.username = username;
+    public Role(int id, String name, User user) {
+        this.id = id;
+        this.name = name;
         this.user = user;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public long getId() {
+        return id;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User getUser() {

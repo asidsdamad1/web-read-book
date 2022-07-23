@@ -1,5 +1,17 @@
 package com.example.springmvcdemo.dev.service;
 
-public interface PublishingHouseService {
+import com.example.springmvcdemo.dev.dto.AuthorDto;
+import com.example.springmvcdemo.dev.dto.PublishingHouseDto;
+import com.example.springmvcdemo.dev.model.PublishingHouse;
 
+import java.util.List;
+
+public interface PublishingHouseService {
+    List<PublishingHouseDto> getAll();
+
+    PublishingHouseDto saveOrUpdater(PublishingHouseDto dto, Long id);
+
+    PublishingHouseDto getById(Long id);
+
+    boolean delete(Long id);
 }

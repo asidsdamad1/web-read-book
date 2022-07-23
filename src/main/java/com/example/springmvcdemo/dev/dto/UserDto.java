@@ -1,14 +1,27 @@
 package com.example.springmvcdemo.dev.dto;
 
 import com.example.springmvcdemo.dev.model.Role;
+import com.example.springmvcdemo.dev.model.User;
 
 public class UserDto {
     private String username;
     private String email;
     private String password;
-    private Role role;
+    private RoleDto role;
 
     public UserDto() {
+    }
+
+    public UserDto(User entity) {
+        if(entity != null) {
+            this.username = entity.getUsername();
+            this.password = entity.getPassword();
+            this.email = entity.getEmail();
+            this.username = entity.getUsername();
+            if(entity.getRole() != null) {
+                this.role = new RoleDto(entity.getRole().getName());
+            }
+        }
     }
 
     public String getUsername() {
@@ -35,11 +48,11 @@ public class UserDto {
         this.password = password;
     }
 
-    public Role getRole() {
+    public RoleDto getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleDto role) {
         this.role = role;
     }
 }

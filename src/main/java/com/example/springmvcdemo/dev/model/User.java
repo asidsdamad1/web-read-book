@@ -13,18 +13,28 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "email")
+    private String email;
 
     @OneToOne
-    @JoinColumn(name = "roleId")
+    @JoinColumn(name = "id")
     private Role role;
 
     public User() {
     }
 
-    public User(String username, String password, Role role) {
+    public User(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {

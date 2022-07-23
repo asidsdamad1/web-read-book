@@ -13,13 +13,13 @@ public class PublishingHouse {
     private long publishId;
 
     @Column(name = "name")
-    private String publishName;
+    private String name;
     @Column(name = "description")
-    private String publishDescription;
+    private String description;
     @Column(name = "email")
-    private String publishEmail;
+    private String email;
     @Column(name = "address")
-    private String publishAddress;
+    private String address;
 
     @OneToMany(mappedBy = "publishingHouse")
     private List<Book> listBook = new ArrayList<Book>();
@@ -27,12 +27,12 @@ public class PublishingHouse {
     public PublishingHouse() {
     }
 
-    public PublishingHouse(long publishId, String publishName, String publishDescription, String publishEmail, String publishAddress, List<Book> listBook) {
+    public PublishingHouse(long publishId, String name, String description, String email, String address, List<Book> listBook) {
         this.publishId = publishId;
-        this.publishName = publishName;
-        this.publishDescription = publishDescription;
-        this.publishEmail = publishEmail;
-        this.publishAddress = publishAddress;
+        this.name = name;
+        this.description = description;
+        this.email = email;
+        this.address = address;
         this.listBook = listBook;
     }
 
@@ -52,35 +52,35 @@ public class PublishingHouse {
         this.publishId = publishId;
     }
 
-    public String getPublishName() {
-        return publishName;
+    public String getName() {
+        return name;
     }
 
-    public void setPublishName(String publishName) {
-        this.publishName = publishName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPublishDescription() {
-        return publishDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPublishDescription(String publishDescription) {
-        this.publishDescription = publishDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getPublishEmail() {
-        return publishEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPublishEmail(String publishEmail) {
-        this.publishEmail = publishEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPublishAddress() {
-        return publishAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPublishAddress(String publishAddress) {
-        this.publishAddress = publishAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

@@ -24,16 +24,18 @@ public class BookServiceImpl implements BookService {
     private BookAuthorRepository bookAuthorRepository;
 
     @Override
-    public List<Book> getAll() {
+    public List<BookDto> getAll() {
         List<Book> books = bookRepository.findAll();
+        List<BookDto> dtos = new ArrayList<>();
         for (Book book : books) {
             if (book.getImg() == null)
                 book.setImg("book-default.png");
 
             if (book.getImg().trim().length() == 0)
                 book.setImg("book-default.png");
+            dtos.add(new BookDto(book, true));
         }
-        return books;
+        return dtos;
     }
 
     @Override
@@ -119,11 +121,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean delete(Long bookId) {
         if (bookId != null) {
-            Book entity = bookRepository.getById(bookId);
-            if (entity != null) {
-                bookRepository.deleteById(bookId);
-                return true;
-            }
+            bookRepository.deleteById(bookId);
+            return true;
         }
         return false;
     }
