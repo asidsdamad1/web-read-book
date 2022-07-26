@@ -7,10 +7,12 @@ import com.example.springmvcdemo.dev.model.*;
 import com.example.springmvcdemo.dev.repository.*;
 import com.example.springmvcdemo.dev.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
@@ -39,7 +41,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto saveOrUpdate(BookDto dto, Long id) {
+    public BookDto saveOrUpdate(BookDto dto, Integer id) {
         if (dto != null) {
             Book entity = null;
             if (id != null)
@@ -109,7 +111,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto getById(Long bookId) {
+    public BookDto getById(Integer bookId) {
         if (bookId != null) {
             Book entity = bookRepository.getById(bookId);
             if (entity != null)
@@ -119,7 +121,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean delete(Long bookId) {
+    public boolean delete(Integer bookId) {
         if (bookId != null) {
             bookRepository.deleteById(bookId);
             return true;
@@ -129,7 +131,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> getLastestBooks(int count) {
-        List<Book> books = bookRepository.getLastestBooks(count);
+        List<Book> books = new ArrayList<>();
+        List<Book> getAllBooks = bookRepository.getLastestBooks();
+        int size = 0;
+        if (getAllBooks.size() < count) size = getAllBooks.size();
+        for (int i = 0; i < count; i++) {
+            if (i == size) break;
+            books.add(getAllBooks.get(i));
+        }
         List<BookDto> bookDtos = new ArrayList<>();
         for (Book book : books) {
             if (book.getImg() == null)
@@ -147,7 +156,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> getBookByViews(int count) {
-        List<Book> books = bookRepository.getBooksByViews(count);
+        List<Book> books = new ArrayList<>();
+        List<Book> getAllBooks = bookRepository.getBooksByViews();
+        int size = 0;
+        if (getAllBooks.size() < count) size = getAllBooks.size();
+        for (int i = 0; i < count; i++) {
+            if (i == size) break;
+            books.add(getAllBooks.get(i));
+        }
         List<BookDto> bookDtos = new ArrayList<>();
         for (Book book : books) {
             if (book.getImg() == null)
@@ -164,7 +180,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getBookByCategory(long id) {
+    public List<BookDto> getBookByCategory(int id) {
         List<Book> books = bookRepository.getBooksByCategory(id);
         List<BookDto> bookDtos = new ArrayList<>();
         for (Book book : books) {
@@ -200,7 +216,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean addImage(long id, String filepath) {
+    public boolean addImage(int id, String filepath) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setImg(filepath);
@@ -211,7 +227,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean deleteImage(long id) {
+    public boolean deleteImage(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             if (entity.getImg() == null)
@@ -227,7 +243,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean addPdf(long id, String filepath) {
+    public boolean addPdf(int id, String filepath) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setPdf(filepath);
@@ -238,7 +254,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean deletePdf(long id) {
+    public boolean deletePdf(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             if (entity.getPdf() == null)
@@ -254,7 +270,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean IncreaseView(long id) {
+    public boolean IncreaseView(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setViews(entity.getViews() + 1);
@@ -265,7 +281,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean Upvote(long id) {
+    public boolean Upvote(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setUpvote(entity.getUpvote() + 1);
@@ -276,7 +292,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean Downvote(long id) {
+    public boolean Downvote(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setDownvote(entity.getDownvote() + 1);

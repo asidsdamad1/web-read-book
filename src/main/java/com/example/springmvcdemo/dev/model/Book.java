@@ -9,9 +9,9 @@ public class Book {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long bookId;
+    private int id;
     @Column(name = "name")
-    private String bookName;
+    private String name;
     @Column(name = "description")
     private String description;
     @Column(name = "views")
@@ -25,7 +25,7 @@ public class Book {
     @Column(name = "img")
     private String img;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId")
     private Category category;
 
@@ -39,9 +39,9 @@ public class Book {
     public Book() {
     }
 
-    public Book(long bookId, String bookName, String description, long views, long upvote, long downvote, String pdf, String img, Category category, List<BookAuthor> author) {
-        this.bookId = bookId;
-        this.bookName = bookName;
+    public Book(int id, String name, String description, long views, long upvote, long downvote, String pdf, String img, Category category, List<BookAuthor> author) {
+        this.id = id;
+        this.name = name;
         this.description = description;
         this.views = views;
         this.upvote = upvote;
@@ -52,20 +52,20 @@ public class Book {
         this.bookAuthors = author;
     }
 
-    public long getBookId() {
-        return bookId;
+    public int getBookId() {
+        return id;
     }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public void setBookId(int id) {
+        this.id = id;
     }
 
     public String getBookName() {
-        return bookName;
+        return name;
     }
 
     public void setBookName(String bookName) {
-        this.bookName = bookName;
+        this.name = name;
     }
 
     public String getDescription() {

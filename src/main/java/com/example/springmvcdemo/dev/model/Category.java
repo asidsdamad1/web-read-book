@@ -12,13 +12,13 @@ public class Category {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long categoryId;
+    private int categoryId;
     @Column(name = "name")
     private String categoryName;
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Book> listBook = new ArrayList<Book>();
 
     public Category() {
@@ -31,11 +31,11 @@ public class Category {
         this.listBook = listBook;
     }
 
-    public long getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 

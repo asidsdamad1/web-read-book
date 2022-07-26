@@ -1,11 +1,8 @@
 package com.example.springmvcdemo.dev.service.Impl;
 
 import com.example.springmvcdemo.dev.dto.AuthorDto;
-import com.example.springmvcdemo.dev.dto.BookDto;
 import com.example.springmvcdemo.dev.model.Author;
-import com.example.springmvcdemo.dev.model.Book;
-import com.example.springmvcdemo.dev.model.BookAuthor;
-import com.example.springmvcdemo.dev.repository.*;
+import com.example.springmvcdemo.dev.repository.AuthorRepository;
 import com.example.springmvcdemo.dev.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,12 +25,12 @@ public class AuthorServiceImple implements AuthorService {
     }
 
     @Override
-    public AuthorDto saveOrUpdater(AuthorDto dto, Long id) {
-        if(dto != null) {
+    public AuthorDto saveOrUpdater(AuthorDto dto, Integer id) {
+        if (dto != null) {
             Author entity = null;
-            if(id != null)
+            if (id != null)
                 entity = authorRepository.findById(id).orElse(null);
-            if(entity == null)
+            if (entity == null)
                 entity = new Author();
 
             entity.setName(dto.getName());
@@ -48,8 +45,8 @@ public class AuthorServiceImple implements AuthorService {
     }
 
     @Override
-    public AuthorDto getById(Long id) {
-        if(id != null) {
+    public AuthorDto getById(Integer id) {
+        if (id != null) {
             Author entity = authorRepository.getById(id);
             return new AuthorDto(entity, true);
         }
@@ -57,8 +54,8 @@ public class AuthorServiceImple implements AuthorService {
     }
 
     @Override
-    public boolean delete(Long id) {
-        if(id != null) {
+    public boolean delete(Integer id) {
+        if (id != null) {
             authorRepository.deleteById(id);
             return true;
         }

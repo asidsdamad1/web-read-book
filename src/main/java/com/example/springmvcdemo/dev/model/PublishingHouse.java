@@ -10,7 +10,7 @@ public class PublishingHouse {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long publishId;
+    private int publishId;
 
     @Column(name = "name")
     private String name;
@@ -27,7 +27,7 @@ public class PublishingHouse {
     public PublishingHouse() {
     }
 
-    public PublishingHouse(long publishId, String name, String description, String email, String address, List<Book> listBook) {
+    public PublishingHouse(int publishId, String name, String description, String email, String address, List<Book> listBook) {
         this.publishId = publishId;
         this.name = name;
         this.description = description;
@@ -44,11 +44,11 @@ public class PublishingHouse {
         this.listBook = listBook;
     }
 
-    public long getPublishId() {
+    public int getPublishId() {
         return publishId;
     }
 
-    public void setPublishId(long publishId) {
+    public void setPublishId(int publishId) {
         this.publishId = publishId;
     }
 

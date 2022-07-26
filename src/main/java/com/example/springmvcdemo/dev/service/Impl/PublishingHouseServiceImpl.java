@@ -29,7 +29,7 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
     }
 
     @Override
-    public PublishingHouseDto saveOrUpdater(PublishingHouseDto dto, Long id) {
+    public PublishingHouseDto saveOrUpdater(PublishingHouseDto dto, Integer id) {
         if(dto != null) {
             PublishingHouse entity = null;
             if(id != null)
@@ -49,7 +49,7 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
     }
 
     @Override
-    public PublishingHouseDto getById(Long id) {
+    public PublishingHouseDto getById(Integer id) {
         if(id != null) {
             PublishingHouse entity = publishingRepository.getById(id);
             return new PublishingHouseDto(entity, true);
@@ -58,7 +58,7 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(Integer id) {
         if(id != null) {
             publishingRepository.deleteById(id);
             return true;

@@ -1,125 +1,110 @@
-<%@include file="/WEB-INF/views/common/taglib.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
+	prefix="decorator"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<%--
-  Created by IntelliJ IDEA.
-  User: asids
-  Date: 5/3/2022
-  Time: 3:01 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trang chủ </title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/fontawesome-free/css/all.min.css"/>">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <link rel="stylesheet"
-          href="<c:url value="/asset/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"/>">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/jqvmap/jqvmap.min.css"/>">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/dist/css/adminlte.min.css"/>">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/daterangepicker/daterangepicker.css"/>">
-    <!-- summernote -->
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/summernote/summernote-bs4.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/asset/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css"/>"/>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Trang quản trị</title>
+
+<!-- Custom fonts for this template-->
+<link href="<c:url value="/assets/admin/vendor/fontawesome-free/css/all.min.css"></c:url>"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="<c:url value="/assets/admin/css/sb-admin-2.min.css"></c:url>" rel="stylesheet">
+<script src="<c:url value="/assets/pdfjs/build/pdf.js"></c:url>"></script>
 </head>
-<body>
-<%@include file="/WEB-INF/views/admin/navbar.jsp" %>
-<!-- /.navbar -->
 
-<!-- Main Sidebar Container -->
-<%@include file="/WEB-INF/views/admin/sidebar.jsp" %>
+<body id="page-top">
 
-<!-- Content Wrapper. Contain;s page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+	<!-- Page Wrapper -->
+	<div id="wrapper">
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <decorator:body/>
+		<!-- Sidebar -->
+		<%@include file="admin/sidebar.jsp"%>
+		<!-- End of Sidebar -->
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
 
-        </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-<%@include file="/WEB-INF/views/admin/footer.jsp" %>
+			<!-- Main Content -->
+			<div id="content">
 
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
+				<!-- Topbar -->
+				<%@include file="admin/topbar.jsp"%>
+				<!-- End of Topbar -->
 
-<!-- jQuery -->
-<script src="<c:url value="/asset/admin/plugins/jquery/jquery.min.js"/>"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<c:url value="/asset/admin/plugins/jquery-ui/jquery-ui.min.js"/>"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="<c:url value="/asset/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-<!-- ChartJS -->
-<script src="<c:url value="/asset/admin/plugins/chart.js/Chart.min.js"/>"></script>
-<!-- Sparkline -->
-<script src="<c:url value="/asset/admin/plugins/sparklines/sparkline.js"/>"></script>
-<!-- JQVMap -->
-<script src="<c:url value="/asset/admin/plugins/jqvmap/jquery.vmap.min.js"/>"></script>
-<script src="<c:url value="/asset/admin/plugins/jqvmap/maps/jquery.vmap.usa.js"/>"></script>
-<!-- jQuery Knob Chart -->
-<script src="<c:url value="/asset/admin/plugins/jquery-knob/jquery.knob.min.js"/>"></script>
-<!-- daterangepicker -->
-<script src="<c:url value="/asset/admin/plugins/moment/moment.min.js"/>"></script>
-<script src="<c:url value="/asset/admin/plugins/daterangepicker/daterangepicker.js"/>"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<c:url value="/asset/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"/>"></script>
-<!-- Summernote -->
-<script src="<c:url value="/asset/admin/plugins/summernote/summernote-bs4.min.js"/>"></script>
-<!-- overlayScrollbars -->
-<script src="<c:url value="/asset/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"/>"></script>
-<!-- AdminLTE App -->
-<script src="<c:url value="/asset/admin/dist/js/adminlte.js"/>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<c:url value="/asset/admin/dist/js/demo.js"/>"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<c:url value="/asset/admin/dist/js/pages/dashboard.js"/>"></script>
-<script src="<c:url value="/asset/admin/plugins/datatables/jquery.dataTables.min.js"  />"></script>
-<script src="<c:url value="/asset/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"  />"></script>
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<decorator:body />
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+			<!-- Footer -->
+			<%@include file="admin/footer.jsp"%>
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="<c:url value="/assets/admin/vendor/jquery/jquery.min.js"></c:url>"></script>
+	<script src="<c:url value="/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></c:url>"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="<c:url value="/assets/admin/vendor/jquery-easing/jquery.easing.min.js"></c:url>"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="<c:url value="/assets/admin/js/sb-admin-2.min.js"></c:url>"></script>
+
 </body>
+
 </html>

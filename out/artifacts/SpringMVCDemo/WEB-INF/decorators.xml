@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <decorators defaultdir="/WEB-INF/views/layouts">
-    <decorator name="web" page="index.jsp">
-        <pattern>/home/*</pattern>
+    <excludes>
+        <pattern>/xem-sach-online</pattern>
+    </excludes>
+    <decorator name="user" page="user.jsp">
+        <pattern>/</pattern>
     </decorator>
-
+    <decorator name="account" page="account.jsp">
+        <pattern>/tai-khoan/*</pattern>
+    </decorator>
     <decorator name="admin" page="admin.jsp">
-        <pattern>/admin/*</pattern>
+        <pattern>/quan-tri/*</pattern>
     </decorator>
-
+    <decorator name="no" page=""></decorator>
 </decorators>

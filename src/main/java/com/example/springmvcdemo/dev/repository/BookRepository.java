@@ -7,20 +7,20 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface BookRepository extends JpaRepository<Book, Long> {
-    @Query("select e from Book e where e.bookId = ?1")
+public interface BookRepository extends JpaRepository<Book, Integer> {
+    @Query("select e from Book e where e.id = ?1")
     Book getById(Long bookId);
 
-    @Query(value = "select * from Book order by Id desc limit 0,:count", nativeQuery = true)
-    List<Book> getLastestBooks(int count);
+    @Query("select e from Book e order by e.id desc")
+    List<Book> getLastestBooks();
 
-    @Query(value = "select * from Book order by views  desc limit 0,:count", nativeQuery = true)
-    List<Book> getBooksByViews(int count);
+    @Query("select e from Book e order by e.views desc ")
+    List<Book> getBooksByViews();
 
     @Query("select e from Book e where e.category.categoryId = ?1")
-    List<Book> getBooksByCategory(long categoryId);
+    List<Book> getBooksByCategory(int categoryId);
 
-    @Query("select e from Book e where e.bookName like ?1")
+    @Query("select e from Book e where e.name like ?1")
     List<Book> getBooksByKeyword(String key);
 
     @Query("select count(e) from Book e")

@@ -20,16 +20,9 @@ public class SpringMVCConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/asset/**").addResourceLocations("/asset/");
-		registry.addResourceHandler("/asset/user/**").addResourceLocations("/asset/user/");
-		registry.addResourceHandler("/asset/user/css/**").addResourceLocations("/asset/user/css/");
-		registry.addResourceHandler("/asset/user/fonts/**").addResourceLocations("/asset/user/fonts/");
-		registry.addResourceHandler("/asset/user/js/**").addResourceLocations("/asset/user/js/");
-		registry.addResourceHandler("/asset/user/images/**").addResourceLocations("/asset/user/images/");
-		registry.addResourceHandler("/asset/admin/**").addResourceLocations("/asset/admin/");
-		registry.addResourceHandler("/asset/admin/dist/**").addResourceLocations("/asset/admin/dist/");
-		registry.addResourceHandler("/asset/admin/plugins/**").addResourceLocations("/asset/admin/plugins/");
-		registry.addResourceHandler("/asset/admin/pages/**").addResourceLocations("/asset/admin/pages/");
+		registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+		registry.addResourceHandler("/file-upload/**").addResourceLocations("/file-upload/");
+
 	}
 
 

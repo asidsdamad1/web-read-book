@@ -9,9 +9,9 @@ import java.util.List;
 public interface PublishingHouseService {
     List<PublishingHouseDto> getAll();
 
-    PublishingHouseDto saveOrUpdater(PublishingHouseDto dto, Long id);
+    PublishingHouseDto saveOrUpdater(PublishingHouseDto dto, Integer id);
 
-    PublishingHouseDto getById(Long id);
+    PublishingHouseDto getById(Integer id);
 
-    boolean delete(Long id);
+    boolean delete(Integer id);
 }

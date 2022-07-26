@@ -24,7 +24,7 @@ public class CatalogController {
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ModelAndView getALl() {
         ModelAndView mav = new ModelAndView("admin/category/categories");
-        List<Category> listCat = catService.getAll();
+        List<CategoryDto> listCat = catService.getAll();
         mav.addObject("listCat", listCat);
         return mav;
     }
@@ -36,22 +36,22 @@ public class CatalogController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("category") CategoryDto dto, @RequestParam Long id) {
+    public String update(@ModelAttribute("category") CategoryDto dto, @RequestParam Integer id) {
         catService.saveOrUpdate(dto, id);
         return "redirect:/admin/catalogController/getAll";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public String update(@ModelAttribute("category") CategoryDto dto ) {
-        catService.saveOrUpdate(dto, dto.getId());
-
-        return "getAll";
-    }
+//    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+//    public String update(@ModelAttribute("category") CategoryDto dto ) {
+//        catService.saveOrUpdate(dto, dto.getId());
+//
+//        return "getAll";
+//    }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ModelAndView getById(@RequestParam int id) {
         ModelAndView mav = new ModelAndView("admin/category/editCategory");
-        Category category = catService.getById(id);
+        CategoryDto category = catService.getById(id);
         mav.addObject("category", category);
         return mav;
     }

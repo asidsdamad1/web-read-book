@@ -9,9 +9,9 @@ import java.util.List;
 public interface AuthorService {
     List<AuthorDto> getAll();
 
-    AuthorDto saveOrUpdater(AuthorDto dto, Long id);
+    AuthorDto saveOrUpdater(AuthorDto dto, Integer id);
 
-    AuthorDto getById(Long id);
+    AuthorDto getById(Integer id);
 
-    boolean delete(Long id);
+    boolean delete(Integer id);
 }

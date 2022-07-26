@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "BookAuthor")
+@IdClass(BookAuthorId.class)
 public class BookAuthor {
-
     @Id
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
@@ -18,11 +18,13 @@ public class BookAuthor {
     @Id
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "authorId")
     private Author author;
 
     @Column(name = "role")
     private String role;
+
+
 
     public BookAuthor() {
     }

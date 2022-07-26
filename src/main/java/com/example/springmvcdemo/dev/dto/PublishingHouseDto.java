@@ -12,6 +12,7 @@ public class PublishingHouseDto extends BaseObjectDto{
     private String email;
     private String address;
     private List<BookDto> bookDtoList;
+
     public PublishingHouseDto() {
     }
 

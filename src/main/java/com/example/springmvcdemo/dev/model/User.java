@@ -4,19 +4,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 public class User {
     @Id
     @Column(name = "username")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String username;
-    @Column(name = "password")
-    private String password;
     @Column(name = "email")
     private String email;
+    @Column(name = "password")
+    private String password;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "roleId")
     private Role role;
 
     public User() {

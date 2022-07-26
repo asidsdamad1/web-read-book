@@ -1,16 +1,16 @@
 package com.example.springmvcdemo.dev.dto;
 
 public class BaseObjectDto {
-    protected Long id;
+    protected Integer id;
 
     public BaseObjectDto() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "BookAuthor")
+@Table(name = "Author")
 public class Author {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -27,7 +27,7 @@ public class Author {
 
     }
 
-    public Author(long id, String name, String description, String email, String address, List<BookAuthor> listBook) {
+    public Author(int id, String name, String description, String email, String address, List<BookAuthor> listBook) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -52,7 +52,7 @@ public class Author {
         this.address = address;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

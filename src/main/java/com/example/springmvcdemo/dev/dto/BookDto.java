@@ -34,10 +34,10 @@ public class BookDto extends BaseObjectDto{
             this.pdf = entity.getPdf();
             this.img = entity.getImg();
             if(entity.getCategory() !=  null) {
-                this.category = new CategoryDto(entity.getCategory(), true);
+                this.category = new CategoryDto(entity.getCategory(), false);
             }
             if(entity.getPublishingHouse() !=  null) {
-                this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), true);
+                this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), false);
             }
             if(simple) {
                 if (entity.getBookAuthors() != null && entity.getBookAuthors().size() > 0) {

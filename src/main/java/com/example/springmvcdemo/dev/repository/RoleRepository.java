@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
 
-    @Query("select count(e) from Role e where e.name=?1")
+    @Query("select e from Role e where e.name=?1")
     Role getByRoleName(String name);
 }

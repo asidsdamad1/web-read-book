@@ -10,33 +10,33 @@ import java.util.List;
 public interface BookService {
     List<BookDto> getAll();
 
-    BookDto saveOrUpdate(BookDto dto, Long id);
+    BookDto saveOrUpdate(BookDto dto, Integer id);
 
-    BookDto getById(Long bookId);
+    BookDto getById(Integer bookId);
 
-    boolean delete(Long bookId);
+    boolean delete(Integer bookId);
 
     List<BookDto> getLastestBooks(int count);
 
     List<BookDto> getBookByViews(int count);
 
-    List<BookDto> getBookByCategory(long id);
+    List<BookDto> getBookByCategory(int id);
 
     List<BookDto> GetBooksByKeyword(String keyword);
 
-    boolean addImage(long id, String filepath);
+    boolean addImage(int id, String filepath);
 
-    boolean deleteImage(long id);
+    boolean deleteImage(int id);
 
-    boolean addPdf(long id, String filepath);
+    boolean addPdf(int id, String filepath);
 
-    boolean deletePdf(long id);
+    boolean deletePdf(int id);
 
-    boolean IncreaseView(long id);
+    boolean IncreaseView(int id);
 
-    boolean Upvote(long id);
+    boolean Upvote(int id);
 
-    boolean Downvote(long id);
+    boolean Downvote(int id);
 
     int countBook();
 
