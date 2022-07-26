@@ -31,6 +31,18 @@ public class AccountController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "tai-khoan/dang-ky", method = RequestMethod.GET)
+    public ModelAndView register(HttpSession httpSession) {
+        Object obj = httpSession.getAttribute("loginState");
+        if (obj != null)
+            return new ModelAndView("redirect:/trang-chu");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("account/register");
+        modelAndView.addObject("userRegister", new UserDto());
+        return modelAndView;
+    }
+
     @RequestMapping(value = "tai-khoan/dang-nhap", method = RequestMethod.POST)
     public ModelAndView login(HttpSession httpSession, @ModelAttribute("userLogin") UserDto userLogin, BindingResult bindingResult,
                               UserLoginValidater userLoginValidater) {
@@ -67,6 +79,9 @@ public class AccountController {
         userRegisterValidator.validate(userRegister, bindingResult);
         if (bindingResult.hasErrors())
             return new ModelAndView("account/register", "userRegister", userRegister);
+
+        if(userService.register(userRegister) != null)
+            return new ModelAndView("redirect:/trang-chu");
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("account/register");

@@ -23,7 +23,7 @@ public class UserRegisterValidator implements Validator {
         if (userRegister.getPassword().trim().length() == 0)
             errors.rejectValue("password", "", "Mật khẩu không được để trống");
 
-        if (userRegister.getUsername().length() < 6 || userRegister.getUsername().length() > 100)
+        if (userRegister.getPassword().length() < 6 || userRegister.getPassword().length() > 100)
             errors.rejectValue("password", "", "Mật khẩu phải có độ dài lớn hơn 6 và nhỏ hơn 100 ký tự");
 
         if(userRegister.getEmail().trim().length()  == 0)

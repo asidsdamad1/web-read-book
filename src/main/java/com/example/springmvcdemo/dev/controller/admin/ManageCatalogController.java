@@ -17,7 +17,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/catalogController")
 @Transactional
-public class CatalogController {
+public class ManageCatalogController {
     @Autowired
     private CategoryService catService;
 

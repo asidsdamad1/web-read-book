@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin/book")
-public class BookController {
+public class ManageBookController {
 
 }

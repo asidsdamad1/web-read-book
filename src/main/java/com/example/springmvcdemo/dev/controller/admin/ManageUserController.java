@@ -1,4 +1,4 @@
 package com.example.springmvcdemo.dev.controller.admin;
 
-public class AuthorController {
+public class ManageUserController {
 }

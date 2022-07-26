@@ -41,7 +41,7 @@
 														<div class="book-price">
 
 															<span class="price"> <a
-																href="<c:url value="/chi-tiet-sach/${ item.ID }"></c:url>">Xem
+																href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">Xem
 																	ngay</a>
 															</span>
 														</div>
@@ -55,7 +55,7 @@
 												<div class="book-details">
 													<h3 class="book-title" style="font-size: 16px;">
 														<a
-															href="<c:url value="/chi-tiet-sach/${ item.ID }"></c:url>">${ item.name }</a>
+															href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">${ item.name }</a>
 													</h3>
 													<div class="star-rating">
 														<c:forEach var="i" begin="1" end="${ item.star }">
@@ -91,7 +91,7 @@
 				</div>
 				<!-- /.col -->
 				<!-- ========================================= CONTENT :END ========================================= -->
-				<!-- ========================================= SIDEBAR ========================================= -->
+				<!-- ========================================= SidEBAR ========================================= -->
 				<div class="col-sm-4 col-sm-pull-8">
 					<aside class="sidebar">
 						<!-- ========================================= BOOK CATEGORY ========================================= -->
@@ -105,7 +105,7 @@
 								<ul class="list-unstyled category-list">
 									<c:forEach var="item" items="${ categories }">
 										<li><a
-											href="<c:url value="/sach-theo-the-loai/${ item.ID }"></c:url>">${ item.name }</a></li>
+											href="<c:url value="/sach-theo-the-loai/${ item.id }"></c:url>">${ item.name }</a></li>
 									</c:forEach>
 								</ul>
 								<!-- /.list-unstyled -->

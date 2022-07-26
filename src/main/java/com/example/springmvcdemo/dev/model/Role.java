@@ -1,6 +1,7 @@
 package com.example.springmvcdemo.dev.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Role")
@@ -12,16 +13,16 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "role")
-    private User user;
+    @OneToMany(mappedBy = "role")
+    private List<User> users;
 
     public Role() {
     }
 
-    public Role(int id, String name, User user) {
+    public Role(int id, String name, List<User> users) {
         this.id = id;
         this.name = name;
-        this.user = user;
+        this.users = users;
     }
 
     public int getId() {
@@ -40,11 +41,11 @@ public class Role {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
