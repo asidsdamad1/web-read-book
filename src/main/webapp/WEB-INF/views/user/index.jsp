@@ -144,7 +144,7 @@
 					<div class="books">
 
 						<div id="new-carousel" class="owl-carousel home-owl-carousel">
-							<c:forEach var="item" items="${ latestBooks }">
+							<c:forEach var="item" items="${ lastestBooks }">
 								<div class="item item-carousel">
 									<div class="books">
 

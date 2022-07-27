@@ -46,7 +46,7 @@
 									</c:if>
 									<c:if test="${ bookInfo.pdf != null }">
 										<a
-											href="<c:url value="/xem-sach-online/${ bookInfo.ID }"></c:url>"
+											href="<c:url value="/xem-sach-online/${ bookInfo.id }"></c:url>"
 											target="_blank" class="price">Xem trực tuyến</a>
 									</c:if>
 								</div>
@@ -89,7 +89,7 @@
 
 						<div class="product-description">
 							<h3>Tác giả và các vai trò khác</h3>
-							<c:forEach var="item" items="${ bookInfo.bookAuthorInfos }">
+							<c:forEach var="item" items="${ bookInfo.bookAuthorDtos }">
 								<p class="book-author">
 									${ item.roleName }: <span class="book-author-name">${ item.name }</span>
 								</p>
@@ -166,7 +166,7 @@
 													<div class="book-price">
 
 														<span class="price"> <a
-															href="<c:url value="/chi-tiet-sach/${ item.ID }"></c:url>">Xem
+															href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">Xem
 																ngay</a>
 														</span>
 													</div>
@@ -180,7 +180,7 @@
 											<div class="book-details">
 												<h3 class="book-title" style="font-size: 16px;">
 													<a
-														href="<c:url value="/chi-tiet-sach/${ item.ID }"></c:url>">${ item.name }</a>
+														href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">${ item.name }</a>
 												</h3>
 												<div class="star-rating">
 													<c:forEach var="i" begin="1" end="${ item.star }">
@@ -223,7 +223,7 @@
 	function upvote(){
 		$(document).ready(function(e){
 			$.post("<c:url value="/thich-sach"></c:url>", {
-				id : ${ bookInfo.ID }
+				id : ${ bookInfo.id }
 			}, function(data){
 				if(data == "Success")
 					alert("Bạn đã đánh giá thích sách thành công!");
@@ -238,7 +238,7 @@
 	function downvote(){
 		$(document).ready(function(e){
 			$.post("<c:url value="/khong-thich-sach"></c:url>", {
-				id : ${ bookInfo.ID }
+				id : ${ bookInfo.id }
 			}, function(data){
 				if(data == "Success")
 					alert("Bạn đã đánh giá không thích sách thành công!");

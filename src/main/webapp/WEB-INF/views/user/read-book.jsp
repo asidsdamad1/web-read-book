@@ -532,7 +532,7 @@
 		setTimeout(function(e){
 			$(document).ready(function(e){
 				$.post("<c:url value="/tang-luot-xem"></c:url>", {
-					id : ${ book.ID }
+					id : ${ book.id }
 				}, function(data){
 					if(data == "Success")
 						console.log("Đã tăng lượt xem thành công!");

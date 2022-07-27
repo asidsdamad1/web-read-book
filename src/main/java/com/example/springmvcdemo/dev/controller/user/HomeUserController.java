@@ -2,6 +2,7 @@ package com.example.springmvcdemo.dev.controller.user;
 
 import com.example.springmvcdemo.dev.service.BookService;
 import com.example.springmvcdemo.dev.service.CategoryService;
+import com.example.springmvcdemo.dev.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,12 @@ public class HomeUserController {
 
     private final CategoryService categoryService;
 
-    public HomeUserController(BookService bookService, CategoryService categoryService) {
+    private final UserService userService;
+
+    public HomeUserController(BookService bookService, CategoryService categoryService, UserService userService) {
         this.bookService = bookService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @RequestMapping(value = {"/", "/trang-chu"}, method = RequestMethod.GET)
@@ -26,10 +30,17 @@ public class HomeUserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user/index");
         Object obj = httpSession.getAttribute("loginState");
-
-        boolean isLogged = obj != null;
+        boolean isLogged = false;
+        boolean isAdmin = false;
+        if(obj != null) {
+            isLogged = true;
+            String loginState = obj.toString();
+            if(loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
+                isAdmin = true;
+        }
 
         modelAndView.addObject("isLogged", isLogged);
+        modelAndView.addObject("isAdmin", isAdmin);
         modelAndView.addObject("lastestBooks", bookService.getLastestBooks(10));
         modelAndView.addObject("booksByViews", bookService.getBookByViews(10));
         return modelAndView;

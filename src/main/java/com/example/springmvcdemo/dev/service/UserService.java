@@ -8,4 +8,5 @@ public interface UserService {
     boolean login(UserDto userLogin);
     UserDto register(UserDto userRegister);
     boolean delete(String username);
+    boolean isAdmin();
 }

@@ -59,19 +59,19 @@
 							<tbody>
 								<c:forEach var="item" items="${ books }">
 									<tr role="row">
-										<td>${ item.ID }</td>
+										<td>${ item.id }</td>
 										<td>${ item.name }</td>
 										<td>
 											<c:url var="post_url" value="/quan-tri/xoa-sach"></c:url> 
-											<form:form id="deleteBook${ item.ID }" method="POST" action="${ post_url }">
-												<input type="hidden" name="id" value="${ item.ID }" />
+											<form:form id="deleteBook${ item.id }" method="POST" action="${ post_url }">
+												<input type="hidden" name="id" value="${ item.id }" />
 											</form:form>
-											<a class="btn btn-success" href="<c:url value="/quan-tri/chinh-sua-sach/${ item.ID }"></c:url>">Chỉnh sửa</a> |
-											<a class="btn btn-success" href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ item.ID }"></c:url>">Hình ảnh</a> |  
-											<a class="btn btn-success" href="<c:url value="/quan-tri/pdf-cua-sach/${ item.ID }"></c:url>">PDF</a> |
-											<a class="btn btn-success" href="<c:url value="/quan-tri/tac-gia-cua-sach/${ item.ID }"></c:url>">Tác giả</a> |
-											<a class="btn btn-primary" href="<c:url value="/quan-tri/chi-tiet-sach/${ item.ID }"></c:url>">Xem chi tiết</a> | 
-											<button type="submit" class="btn btn-danger" form="deleteBook${ item.ID }">Xóa</button>
+											<a class="btn btn-success" href="<c:url value="/quan-tri/chinh-sua-sach/${ item.id }"></c:url>">Chỉnh sửa</a> |
+											<a class="btn btn-success" href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ item.id }"></c:url>">Hình ảnh</a> |
+											<a class="btn btn-success" href="<c:url value="/quan-tri/pdf-cua-sach/${ item.id }"></c:url>">PDF</a> |
+											<a class="btn btn-success" href="<c:url value="/quan-tri/tac-gia-cua-sach/${ item.id }"></c:url>">Tác giả</a> |
+											<a class="btn btn-primary" href="<c:url value="/quan-tri/chi-tiet-sach/${ item.id }"></c:url>">Xem chi tiết</a> |
+											<button type="submit" class="btn btn-danger" form="deleteBook${ item.id }">Xóa</button>
 										</td>
 									</tr>
 								</c:forEach>

@@ -270,7 +270,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean IncreaseView(int id) {
+    public boolean increaseView(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setViews(entity.getViews() + 1);
@@ -281,7 +281,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean Upvote(int id) {
+    public boolean upvote(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setUpvote(entity.getUpvote() + 1);
@@ -292,7 +292,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean Downvote(int id) {
+    public boolean downvote(int id) {
         Book entity = bookRepository.getById(id);
         if (entity != null) {
             entity.setDownvote(entity.getDownvote() + 1);

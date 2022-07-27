@@ -32,11 +32,11 @@ public interface BookService {
 
     boolean deletePdf(int id);
 
-    boolean IncreaseView(int id);
+    boolean increaseView(int id);
 
-    boolean Upvote(int id);
+    boolean upvote(int id);
 
-    boolean Downvote(int id);
+    boolean downvote(int id);
 
     int countBook();
 
