@@ -13,7 +13,7 @@
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Chi tiết tác giả "${ Author.name }"</h6>
+		<h6 class="m-0 font-weight-bold text-primary">Chi tiết tác giả "${ author.name }"</h6>
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -22,23 +22,23 @@
 					<tbody>
 						<tr>
 							<th style="width: 25%;">ID tác giả</th>
-							<td>${ Author.ID }</td>
+							<td>${ author.id }</td>
 						</tr>
 						<tr>
 							<th style="width: 25%;">Tên tác giả</th>
-							<td>${ Author.name }</td>
+							<td>${ author.name }</td>
 						</tr>
 						<tr>
 							<th style="width: 25%;">Mô tả tác giả</th>
-							<td>${ Author.description }</td>
+							<td>${ author.description }</td>
 						</tr>
 						<tr>
 							<th style="width: 25%;">Email tác giả</th>
-							<td>${ Author.email }</td>
+							<td>${ author.email }</td>
 						</tr>
 						<tr>
 							<th style="width: 25%;">Địa chỉ tác giả</th>
-							<td>${ Author.address }</td>
+							<td>${ author.address }</td>
 						</tr>
 					</tbody>
 				</table>
@@ -49,6 +49,6 @@
 		<a class="btn btn-primary"
 			href="<c:url value="/quan-tri/danh-sach-tac-gia"></c:url>">Quay
 			về danh sách</a> | <a class="btn btn-success"
-			href="<c:url value="/quan-tri/chinh-sua-tac-gia/${ Author.ID }"></c:url>">Chỉnh sửa</a>
+			href="<c:url value="/quan-tri/chinh-sua-tac-gia/${ author.id }"></c:url>">Chỉnh sửa</a>
 	</div>
 </div>

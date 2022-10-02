@@ -18,7 +18,7 @@ public class PublishingHouseDto extends BaseObjectDto{
 
     public PublishingHouseDto(PublishingHouse entity, boolean simple) {
         if(entity != null) {
-            this.id = entity.getPublishId();
+            this.id = entity.getId();
             this.name = entity.getName();
             this.description = entity.getDescription();
             this.email = entity.getEmail();

@@ -91,7 +91,7 @@
 							<h3>Tác giả và các vai trò khác</h3>
 							<c:forEach var="item" items="${ bookInfo.bookAuthorDtos }">
 								<p class="book-author">
-									${ item.roleName }: <span class="book-author-name">${ item.name }</span>
+									Tác giả: <span class="book-author-name">${ item.author.name }</span>
 								</p>
 							</c:forEach>
 							<h3>Thể loại, nhà xuất bản</h3>

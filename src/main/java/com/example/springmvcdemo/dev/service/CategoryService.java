@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
+@Service
 public interface CategoryService {
     CategoryDto saveOrUpdate(CategoryDto cat, Integer id);
     List<CategoryDto> getAll();

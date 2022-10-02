@@ -18,7 +18,7 @@
 			<div class="card bg-secondary text-white shadow">
 				<div class="card-body">
 					${ state }
-					<div><a class="text-white-50 small" href="<c:url value="/quan-tri/chinh-sua-sach/${ book.ID }"></c:url>">Tắt thông báo này</a></div>
+					<div><a class="text-white-50 small" href="<c:url value="/quan-tri/chinh-sua-sach/${ book.id }"></c:url>">Tắt thông báo này</a></div>
 				</div>
 			</div>
 		</c:if>
@@ -30,12 +30,19 @@
 		<h6 class="m-0 font-weight-bold text-primary">Chỉnh sửa sách "${ book.name }"</h6>
 	</div>
 	<div class="card-body">
-		<c:url var="post_url" value="/quan-tri/chinh-sua-sach/${ book.ID }"></c:url>
+		<c:url var="post_url" value="/quan-tri/chinh-sua-sach/${ book.id }"></c:url>
 		<form:form method="POST" action="${ post_url }"
 			modelAttribute="book">
 			<div class="form-horizontal">
 
-				<form:hidden path="ID"/>
+				<form:hidden path="id"/>
+				<form:hidden path="views"/>
+				<form:hidden path="upvote"/>
+				<form:hidden path="downvote"/>
+				<form:hidden path="star"/>
+				<form:hidden path="pdf"/>
+				<form:hidden path="img"/>
+
 				<div class="form-group">
 					<label class="control-label" for="name">Tên sách</label>
 					<div>
@@ -53,22 +60,22 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label" for="categoryId">Chọn thể loại</label>
+					<label class="control-label" for="category.id">Chọn thể loại</label>
 					<div>
-						<form:select path="categoryId" cssClass="form-control">
-							<form:options items="${ categories }" itemValue="ID" itemLabel="name"></form:options>
+						<form:select path="category.id" cssClass="form-control">
+							<form:options items="${ categories }" itemValue="id" itemLabel="name"></form:options>
 						</form:select>
-						<form:errors path="categoryId" cssClass="field-validation-valid text-danger"/>
+						<form:errors path="category.id" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label" for="publishingHouseId">Chọn nhà xuất bản</label>
+					<label class="control-label" for="publishingHouse.id">Chọn nhà xuất bản</label>
 					<div>
-						<form:select path="publishingHouseId" cssClass="form-control">
-							<form:options items="${ publishingHouses }" itemValue="ID" itemLabel="name"></form:options>							
+						<form:select path="publishingHouse.id" cssClass="form-control">
+							<form:options items="${ publishingHouses }" itemValue="id" itemLabel="name"></form:options>
 						</form:select>
-						<form:errors path="publishingHouseId" cssClass="field-validation-valid text-danger"/>
+						<form:errors path="publishingHouse.id" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 
@@ -85,12 +92,12 @@
 			href="<c:url value="/quan-tri/danh-sach-sach"></c:url>">Quay về danh
 			sách</a>
 		<a class="btn btn-primary"
-			href="<c:url value="/quan-tri/chi-tiet-sach/${ book.ID }"></c:url>">Xem chi tiết</a>
+			href="<c:url value="/quan-tri/chi-tiet-sach/${ book.id }"></c:url>">Xem chi tiết</a>
 		<a class="btn btn-success"
-			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ book.ID }"></c:url>">Hình ảnh</a>
+			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ book.id }"></c:url>">Hình ảnh</a>
 		<a class="btn btn-success"
-			href="<c:url value="/quan-tri/pdf-cua-sach/${ book.ID }"></c:url>">PDF</a>
+			href="<c:url value="/quan-tri/pdf-cua-sach/${ book.id }"></c:url>">PDF</a>
 		<a class="btn btn-success"
-			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.ID }"></c:url>">Tác giả</a>
+			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.id }"></c:url>">Tác giả</a>
 	</div>
 </div>

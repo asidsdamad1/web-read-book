@@ -1,5 +1,7 @@
 package com.example.springmvcdemo.dev.service;
 
+import com.example.springmvcdemo.dev.dto.AuthorDto;
+import com.example.springmvcdemo.dev.dto.BookAuthorDto;
 import com.example.springmvcdemo.dev.dto.BookDto;
 import com.example.springmvcdemo.dev.model.Book;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ public interface BookService {
     List<BookDto> getAll();
 
     BookDto saveOrUpdate(BookDto dto, Integer id);
+
+
 
     BookDto getById(Integer bookId);
 
@@ -39,6 +43,5 @@ public interface BookService {
     boolean downvote(int id);
 
     int countBook();
-
 
 }

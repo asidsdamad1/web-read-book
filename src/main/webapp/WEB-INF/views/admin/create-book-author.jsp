@@ -32,7 +32,7 @@
 	<div class="card-body">
 		<c:url var="post_url" value="/quan-tri/tao-moi-tac-gia"></c:url>
 		<form:form method="POST" action="${ post_url }"
-			modelAttribute="bookAuthor">
+			modelAttribute="author">
 			<div class="form-horizontal">
 
 				<div class="form-group">

@@ -6,11 +6,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "PublishingHouse")
-public class PublishingHouse {
-    @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int publishId;
+public class PublishingHouse extends BaseObject{
+
 
     @Column(name = "name")
     private String name;
@@ -27,14 +24,6 @@ public class PublishingHouse {
     public PublishingHouse() {
     }
 
-    public PublishingHouse(int publishId, String name, String description, String email, String address, List<Book> listBook) {
-        this.publishId = publishId;
-        this.name = name;
-        this.description = description;
-        this.email = email;
-        this.address = address;
-        this.listBook = listBook;
-    }
 
     public List<Book> getListBook() {
         return listBook;
@@ -44,13 +33,6 @@ public class PublishingHouse {
         this.listBook = listBook;
     }
 
-    public int getPublishId() {
-        return publishId;
-    }
-
-    public void setPublishId(int publishId) {
-        this.publishId = publishId;
-    }
 
     public String getName() {
         return name;

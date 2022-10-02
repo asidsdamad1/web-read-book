@@ -18,7 +18,7 @@
 			<div class="card bg-secondary text-white shadow">
 				<div class="card-body">
 					${ state }
-					<div><a class="text-white-50 small" href="<c:url value="/quan-tri/chinh-sua-tac-gia/${ bookAuthor.ID }"></c:url>">Tắt thông báo này</a></div>
+					<div><a class="text-white-50 small" href="<c:url value="/quan-tri/chinh-sua-tac-gia/${ author.id }"></c:url>">Tắt thông báo này</a></div>
 				</div>
 			</div>
 		</c:if>
@@ -27,15 +27,15 @@
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Chỉnh sửa tác giả "${ bookAuthor.name }"</h6>
+		<h6 class="m-0 font-weight-bold text-primary">Chỉnh sửa tác giả "${ author.name }"</h6>
 	</div>
 	<div class="card-body">
-		<c:url var="post_url" value="/quan-tri/chinh-sua-tac-gia/${ bookAuthor.ID }"></c:url>
+		<c:url var="post_url" value="/quan-tri/chinh-sua-tac-gia/${ author.id }"></c:url>
 		<form:form method="POST" action="${ post_url }"
-			modelAttribute="bookAuthor">
+			modelAttribute="author">
 			<div class="form-horizontal">
 				
-				<form:hidden path="ID"/>
+				<form:hidden path="id"/>
 				<div class="form-group">
 					<label class="control-label" for="name">Tên tác giả</label>
 					<div>
@@ -83,6 +83,6 @@
 			href="<c:url value="/quan-tri/danh-sach-tac-gia"></c:url>">Quay về danh
 			sách</a>
 		<a class="btn btn-primary"
-			href="<c:url value="/quan-tri/chi-tiet-tac-gia/${ bookAuthor.ID }"></c:url>">Xem chi tiết</a>
+			href="<c:url value="/quan-tri/chi-tiet-tac-gia/${ author.id }"></c:url>">Xem chi tiết</a>
 	</div>
 </div>

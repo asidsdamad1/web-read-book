@@ -1,8 +1,6 @@
 package com.example.springmvcdemo.dev.service.Impl;
 
-import com.example.springmvcdemo.dev.dto.AuthorDto;
 import com.example.springmvcdemo.dev.dto.PublishingHouseDto;
-import com.example.springmvcdemo.dev.model.Author;
 import com.example.springmvcdemo.dev.model.PublishingHouse;
 import com.example.springmvcdemo.dev.repository.PublishingHouseRepository;
 import com.example.springmvcdemo.dev.service.PublishingHouseService;
@@ -14,10 +12,10 @@ import java.util.List;
 
 @Service
 public class PublishingHouseServiceImpl implements PublishingHouseService {
-    
+
     @Autowired
     private PublishingHouseRepository publishingRepository;
-    
+
     @Override
     public List<PublishingHouseDto> getAll() {
         List<PublishingHouse> publishingHouses = publishingRepository.findAll();
@@ -30,11 +28,11 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
 
     @Override
     public PublishingHouseDto saveOrUpdater(PublishingHouseDto dto, Integer id) {
-        if(dto != null) {
+        if (dto != null) {
             PublishingHouse entity = null;
-            if(id != null)
+            if (id != null)
                 entity = publishingRepository.findById(id).orElse(null);
-            if(entity == null)
+            if (entity == null)
                 entity = new PublishingHouse();
 
             entity.setName(dto.getName());
@@ -50,7 +48,7 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
 
     @Override
     public PublishingHouseDto getById(Integer id) {
-        if(id != null) {
+        if (id != null) {
             PublishingHouse entity = publishingRepository.getById(id);
             return new PublishingHouseDto(entity, true);
         }
@@ -59,7 +57,7 @@ public class PublishingHouseServiceImpl implements PublishingHouseService {
 
     @Override
     public boolean delete(Integer id) {
-        if(id != null) {
+        if (id != null) {
             publishingRepository.deleteById(id);
             return true;
         }

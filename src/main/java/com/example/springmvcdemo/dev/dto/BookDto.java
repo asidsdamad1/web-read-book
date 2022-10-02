@@ -1,12 +1,13 @@
 package com.example.springmvcdemo.dev.dto;
 
+import com.example.springmvcdemo.dev.model.Author;
 import com.example.springmvcdemo.dev.model.Book;
 import com.example.springmvcdemo.dev.model.BookAuthor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDto extends BaseObjectDto{
+public class BookDto extends BaseObjectDto {
     private String name;
     private String description;
     private PublishingHouseDto publishingHouse;
@@ -23,9 +24,13 @@ public class BookDto extends BaseObjectDto{
     public BookDto() {
     }
 
+    public BookDto(Book entity) {
+        this(entity, true);
+    }
+
     public BookDto(Book entity, boolean simple) {
-        if(entity != null) {
-            this.id = entity.getBookId();
+        if (entity != null) {
+            this.id = entity.getId();
             this.name = entity.getBookName();
             this.description = entity.getDescription();
             this.views = entity.getViews();
@@ -33,13 +38,13 @@ public class BookDto extends BaseObjectDto{
             this.downvote = entity.getDownvote();
             this.pdf = entity.getPdf();
             this.img = entity.getImg();
-            if(entity.getCategory() !=  null) {
+            if (entity.getCategory() != null) {
                 this.category = new CategoryDto(entity.getCategory(), false);
             }
-            if(entity.getPublishingHouse() !=  null) {
+            if (entity.getPublishingHouse() != null) {
                 this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), false);
             }
-            if(simple) {
+            if (simple) {
                 if (entity.getBookAuthors() != null && entity.getBookAuthors().size() > 0) {
                     this.bookAuthorDtos = new ArrayList<>();
                     for (BookAuthor item : entity.getBookAuthors()) {
@@ -50,9 +55,9 @@ public class BookDto extends BaseObjectDto{
         }
     }
 
-    public BookDto(Book entity, RatingDto ratingDto,  boolean simple) {
-        if(entity != null) {
-            this.id = entity.getBookId();
+    public BookDto(Book entity, RatingDto ratingDto, boolean simple) {
+        if (entity != null) {
+            this.id = entity.getId();
             this.name = entity.getBookName();
             this.description = entity.getDescription();
             this.views = entity.getViews();
@@ -61,13 +66,13 @@ public class BookDto extends BaseObjectDto{
             this.pdf = entity.getPdf();
             this.img = entity.getImg();
             this.star = ratingDto.SolveStar();
-            if(entity.getCategory() !=  null) {
+            if (entity.getCategory() != null) {
                 this.category = new CategoryDto(entity.getCategory(), true);
             }
-            if(entity.getPublishingHouse() !=  null) {
+            if (entity.getPublishingHouse() != null) {
                 this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), true);
             }
-            if(simple) {
+            if (simple) {
                 if (entity.getBookAuthors() != null && entity.getBookAuthors().size() > 0) {
                     this.bookAuthorDtos = new ArrayList<>();
                     for (BookAuthor item : entity.getBookAuthors()) {

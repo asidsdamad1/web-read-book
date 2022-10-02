@@ -4,7 +4,7 @@ import com.example.springmvcdemo.dev.dto.UserDto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class UserLoginValidater implements Validator {
+public class UserLoginValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz.equals(UserDto.class);

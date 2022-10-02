@@ -34,7 +34,6 @@
 			<div id="dataTable" class="dataTables_wrapper dt-bootstrap4">
 
 
-
 				<div class="row">
 					<div class="col-sm-12">
 						<table class="table table-bordered dataTable" id="dataTable"
@@ -57,18 +56,18 @@
 								</tr>
 							</tfoot>
 							<tbody>
-								<c:forEach var="item" items="${ bookAuthors }">
+								<c:forEach var="item" items="${ authors }">
 									<tr role="row">
-										<td>${ item.ID }</td>
+										<td>${ item.id }</td>
 										<td>${ item.name }</td>
 										<td>
 											<c:url var="post_url" value="/quan-tri/xoa-tac-gia"></c:url> 
-											<form:form id="deleteBookAuthor${ item.ID }" method="POST" action="${ post_url }">
-												<input type="hidden" name="id" value="${ item.ID }" />
+											<form:form id="deleteBookAuthor${ item.id }" method="POST" action="${ post_url }">
+												<input type="hidden" name="id" value="${ item.id }" />
 											</form:form>
-											<a class="btn btn-success" href="<c:url value="/quan-tri/chinh-sua-tac-gia/${ item.ID }"></c:url>">Chỉnh sửa</a> | 
-											<a class="btn btn-primary" href="<c:url value="/quan-tri/chi-tiet-tac-gia/${ item.ID }"></c:url>">Xem chi tiết</a> | 
-											<button type="submit" class="btn btn-danger" form="deleteBookAuthor${ item.ID }">Xóa</button>
+											<a class="btn btn-success" href="<c:url value="/quan-tri/chinh-sua-tac-gia/${ item.id }"></c:url>">Chỉnh sửa</a> |
+											<a class="btn btn-primary" href="<c:url value="/quan-tri/chi-tiet-tac-gia/${ item.id }"></c:url>">Xem chi tiết</a> |
+											<button type="submit" class="btn btn-danger" form="deleteBookAuthor${ item.id }">Xóa</button>
 										</td>
 									</tr>
 								</c:forEach>

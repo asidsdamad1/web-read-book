@@ -16,7 +16,7 @@ public class CategoryDto extends BaseObjectDto {
 
     public CategoryDto(Category entity, boolean simple) {
         if (entity != null) {
-            this.id = entity.getCategoryId();
+            this.id = entity.getId();
             this.name = entity.getCategoryName();
             this.description = entity.getDescription();
             if (simple) {

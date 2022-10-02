@@ -8,36 +8,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "Category")
-public class Category {
-    @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
+public class Category extends BaseObject{
+
     @Column(name = "name")
     private String categoryName;
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL)
     private List<Book> listBook = new ArrayList<Book>();
 
     public Category() {
     }
 
-    public Category(int categoryId, String categoryName, String description, List<Book> listBook) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-        this.description = description;
-        this.listBook = listBook;
-    }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
 
     public String getCategoryName() {
         return categoryName;

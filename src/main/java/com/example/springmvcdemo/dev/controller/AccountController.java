@@ -2,7 +2,7 @@ package com.example.springmvcdemo.dev.controller;
 
 import com.example.springmvcdemo.dev.dto.UserDto;
 import com.example.springmvcdemo.dev.service.UserService;
-import com.example.springmvcdemo.dev.validator.UserLoginValidater;
+import com.example.springmvcdemo.dev.validator.UserLoginValidator;
 import com.example.springmvcdemo.dev.validator.UserRegisterValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,12 +45,12 @@ public class AccountController {
 
     @RequestMapping(value = "tai-khoan/dang-nhap", method = RequestMethod.POST)
     public ModelAndView login(HttpSession httpSession, @ModelAttribute("userLogin") UserDto userLogin, BindingResult bindingResult,
-                              UserLoginValidater userLoginValidater) {
+                              UserLoginValidator userLoginValidator) {
         Object obj = httpSession.getAttribute("loginState");
         if (obj != null)
             return new ModelAndView("redirect:/");
 
-        userLoginValidater.validate(userLogin, bindingResult);
+        userLoginValidator.validate(userLogin, bindingResult);
         if (bindingResult.hasErrors())
             return new ModelAndView("account/login", "userLogin", userLogin);
 

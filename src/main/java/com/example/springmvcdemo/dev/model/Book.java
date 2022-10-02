@@ -5,11 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Book")
-public class Book {
-    @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Book extends BaseObject{
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -33,38 +29,18 @@ public class Book {
     @JoinColumn(name = "publishingHouseId")
     private PublishingHouse publishingHouse;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookAuthor> bookAuthors;
 
     public Book() {
     }
 
-    public Book(int id, String name, String description, long views, long upvote, long downvote, String pdf, String img, Category category, List<BookAuthor> author) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.views = views;
-        this.upvote = upvote;
-        this.downvote = downvote;
-        this.pdf = pdf;
-        this.img = img;
-        this.category = category;
-        this.bookAuthors = author;
-    }
-
-    public int getBookId() {
-        return id;
-    }
-
-    public void setBookId(int id) {
-        this.id = id;
-    }
 
     public String getBookName() {
         return name;
     }
 
-    public void setBookName(String bookName) {
+    public void setBookName(String name) {
         this.name = name;
     }
 

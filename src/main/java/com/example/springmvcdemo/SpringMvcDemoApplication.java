@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties
-@EntityScan(basePackages = {"com.example.springmvcdemo.dev.model"})
 public class SpringMvcDemoApplication {
 
     public static void main(String[] args) {

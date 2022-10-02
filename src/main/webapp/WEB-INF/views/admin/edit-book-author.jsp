@@ -21,7 +21,7 @@
 					${ state }
 					<div>
 						<a class="text-white-50 small"
-							href="<c:url value="/quan-tri/tac-gia-cua-sach/${bookInfo.ID}"></c:url>">Tắt
+							href="<c:url value="/quan-tri/tac-gia-cua-sach/${book.id}"></c:url>">Tắt
 							thông báo này</a>
 					</div>
 				</div>
@@ -32,34 +32,35 @@
 
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Thêm tác giả cho sách "${ bookInfo.name }"</h6>
+		<h6 class="m-0 font-weight-bold text-primary">Thêm tác giả cho sách "${ book.name }"</h6>
 	</div>
 	<div class="card-body">
 		<c:url var="post_url" value="/quan-tri/them-tac-gia-cua-sach"></c:url>
-		<form:form method="POST" action="${ post_url }" modelAttribute="authorContribute">
+			<form:form method="POST" action="${ post_url }" modelAttribute="authorContribute">
 			<div class="form-horizontal">
 
-				<input type="hidden" name="bookId" value="${ bookInfo.ID }" />
+				<input type="hidden" name="bookId" path="bookId" value="${ book.id }" />
 				<div class="form-group">
-					<label class="control-label" for="bookAuthorId">Chọn tác giả</label>
+					<label class="control-label" for="authorId">Chọn tác giả</label>
 					<div>
-						<select name="bookAuthorId" id="bookAuthorId" class="form-control">
-							<c:forEach var="item" items="${ bookAuthors }">
-								<option value="${ item.ID }">${ item.name }</option>
+						<select name="authorId" id="authorId" class="form-control">
+							<c:forEach var="item" items="${ author }">
+								<option value="${ item.id }">${ item.name }</option>
 							</c:forEach>
 						</select>
-						<form:errors path="bookAuthorId" cssClass="field-validation-valid text-danger"/>
+
+						<form:errors path="authorId" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 				
-				<div class="form-group">
-					<label class="control-label" for="name">Vai trò cụ thể</label>
-					<div>
-						<form:input path="role"
-							cssClass="form-control text-box single-line" />
-							<form:errors path="role" cssClass="field-validation-valid text-danger"/>
-					</div>
-				</div>
+<%--				<div class="form-group">--%>
+<%--					<label class="control-label" for="name">Vai trò cụ thể</label>--%>
+<%--					<div>--%>
+<%--						<form:input path="role"--%>
+<%--							cssClass="form-control text-box single-line" />--%>
+<%--							<form:errors path="role" cssClass="field-validation-valid text-danger"/>--%>
+<%--					</div>--%>
+<%--				</div>--%>
 
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-10">
@@ -76,23 +77,28 @@
 			<div id="dataTable" class="dataTables_wrapper dt-bootstrap4">
 				<table class="table table-bordered table table-hover">
 					<tbody>
-						<c:forEach var="item" items="${ bookInfo.bookAuthorInfos }">
+						<c:forEach var="item" items="${ book.bookAuthorDtos }">
 						<tr>
-							<th style="width: 25%;">Tác giả</th>
-							<td>${ item.name }</td>
-							<td>Vai trò cụ thể: ${ item.roleName }</td>
-						</tr>
-						</c:forEach>
-						<tr>
-							<th style="width: 25%;">Xóa tác giả</th>
-							<td><c:url var="post_url" value="/quan-tri/xoa-tat-ca-tac-gia-cua-sach"></c:url>
+							<td>${ item.author.name }</td>
+							<td><c:url var="post_url" value="/quan-tri/xoa-tac-gia-cua-sach"></c:url>
 								<form:form id="deleteBookAuthor" method="POST"
-									action="${ post_url }">
-									<input type="hidden" name="id" value="${ bookInfo.ID }" />
+										   action="${ post_url }">
+									<input type="hidden" name="id" value="${ item.author.id }" />
 									<button type="submit" class="btn btn-danger">Xóa</button>
 								</form:form></td>
 							<td></td>
 						</tr>
+						</c:forEach>
+<%--						<tr>--%>
+<%--							<th style="width: 25%;">Xóa tác giả</th>--%>
+<%--							<td><c:url var="post_url" value="/quan-tri/xoa-tat-ca-tac-gia-cua-sach"></c:url>--%>
+<%--								<form:form id="deleteBookAuthor" method="POST"--%>
+<%--									action="${ post_url }">--%>
+<%--									<input type="hidden" name="id" value="${ book.id }" />--%>
+<%--									<button type="submit" class="btn btn-danger">Xóa</button>--%>
+<%--								</form:form></td>--%>
+<%--							<td></td>--%>
+<%--						</tr>--%>
 					</tbody>
 				</table>
 			</div>
@@ -104,12 +110,12 @@
 			href="<c:url value="/quan-tri/danh-sach-sach"></c:url>">Quay về
 			danh sách</a>
 		<a class="btn btn-primary"
-			href="<c:url value="/quan-tri/chi-tiet-sach/${ bookInfo.ID }"></c:url>">Xem chi tiết</a>
+			href="<c:url value="/quan-tri/chi-tiet-sach/${ book.id }"></c:url>">Xem chi tiết</a>
 		<a class="btn btn-success"
-			href="<c:url value="/quan-tri/chinh-sua-sach/${ bookInfo.ID }"></c:url>">Chỉnh sửa</a>
+			href="<c:url value="/quan-tri/chinh-sua-sach/${ book.id }"></c:url>">Chỉnh sửa</a>
 		<a class="btn btn-success"
-			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ bookInfo.ID }"></c:url>">Hình ảnh</a>
+			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ book.id }"></c:url>">Hình ảnh</a>
 		<a class="btn btn-success"
-			href="<c:url value="/quan-tri/pdf-cua-sach/${ bookInfo.ID }"></c:url>">PDF</a>
+			href="<c:url value="/quan-tri/pdf-cua-sach/${ book.id }"></c:url>">PDF</a>
 	</div>
 </div>

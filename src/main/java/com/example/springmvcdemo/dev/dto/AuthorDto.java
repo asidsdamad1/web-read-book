@@ -17,6 +17,10 @@ public class AuthorDto extends BaseObjectDto {
     public AuthorDto() {
     }
 
+    public AuthorDto(Author entity) {
+        this(entity, true);
+    }
+
     public AuthorDto(Author entity, boolean simple) {
         if(entity != null) {
             this.id = entity.getId();
@@ -24,6 +28,7 @@ public class AuthorDto extends BaseObjectDto {
             this.description = entity.getDescription();
             this.email = entity.getEmail();
             this.address = entity.getAddress();
+
             if(simple) {
                 if(entity.getListBook() != null && entity.getListBook().size() >0) {
                     this.bookAuthors = new ArrayList<BookAuthorDto>();

@@ -4,6 +4,8 @@ import com.example.springmvcdemo.dev.model.Book;
 import com.example.springmvcdemo.dev.model.BookAuthor;
 
 public class BookAuthorDto extends BaseObjectDto{
+    private int bookId;
+    private int authorId;
     private BookDto book;
     private AuthorDto  author;
 
@@ -13,10 +15,10 @@ public class BookAuthorDto extends BaseObjectDto{
     public BookAuthorDto(BookAuthor entity) {
         if(entity != null) {
             if(entity.getBook() !=null) {
-                this.book = new BookDto(entity.getBook(), true);
+                this.book = new BookDto(entity.getBook(), false);
             }
             if(entity.getAuthor() !=null) {
-                this.author = new AuthorDto(entity.getAuthor(), true);
+                this.author = new AuthorDto(entity.getAuthor(), false);
             }
         }
 
@@ -36,5 +38,21 @@ public class BookAuthorDto extends BaseObjectDto{
 
     public void setAuthor(AuthorDto author) {
         this.author = author;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 }

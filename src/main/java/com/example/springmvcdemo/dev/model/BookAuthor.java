@@ -7,15 +7,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "BookAuthor")
-@IdClass(BookAuthorId.class)
-public class BookAuthor {
-    @Id
+public class BookAuthor extends BaseObject{
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "bookId")
     private Book book;
 
-    @Id
     @ManyToOne
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "authorId")
@@ -23,8 +20,6 @@ public class BookAuthor {
 
     @Column(name = "role")
     private String role;
-
-
 
     public BookAuthor() {
     }

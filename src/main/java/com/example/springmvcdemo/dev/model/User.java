@@ -1,12 +1,11 @@
 package com.example.springmvcdemo.dev.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "Users")
-public class User {
-    @Id
+public class User extends BaseObject {
+
     @Column(name = "username")
     private String username;
     @Column(name = "email")

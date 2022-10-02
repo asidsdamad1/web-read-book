@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query("select e from Book e where e.id = ?1")
-    Book getById(Long bookId);
+    Book getById(int bookId);
 
     @Query("select e from Book e order by e.id desc")
     List<Book> getLastestBooks();
@@ -17,7 +17,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query("select e from Book e order by e.views desc ")
     List<Book> getBooksByViews();
 
-    @Query("select e from Book e where e.category.categoryId = ?1")
+    @Query("select e from Book e where e.category.id = ?1")
     List<Book> getBooksByCategory(int categoryId);
 
     @Query("select e from Book e where e.name like ?1")

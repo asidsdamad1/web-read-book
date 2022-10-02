@@ -1,16 +1,12 @@
 package com.example.springmvcdemo.dev.model;
 
-import  javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "Author")
-public class Author {
-    @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Author extends BaseObject{
+
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -27,14 +23,7 @@ public class Author {
 
     }
 
-    public Author(int id, String name, String description, String email, String address, List<BookAuthor> listBook) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.email = email;
-        this.address = address;
-        this.listBook = listBook;
-    }
+
 
     public String getEmail() {
         return email;
@@ -52,9 +41,7 @@ public class Author {
         this.address = address;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
 
     public String getName() {

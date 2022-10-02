@@ -22,7 +22,7 @@
 					<tbody>
 						<tr>
 							<th style="width: 25%;">ID sách</th>
-							<td>${ bookInfo.ID }</td>
+							<td>${ bookInfo.id }</td>
 						</tr>
 						<tr>
 							<th style="width: 25%;">Tên sách</th>
@@ -48,8 +48,8 @@
 							<th style="width: 25%;">Tác giả</th>
 							<td>
 								<ul>
-									<c:forEach var="item" items="${ bookInfo.bookAuthorInfos }">
-										<li>${ item.name }--Vai trò: ${ item.roleName }</li>
+									<c:forEach var="item" items="${ bookInfo.bookAuthorDtos }">
+										<li>${ item.author.name }</li>
 									</c:forEach>
 								</ul>
 							</td>
@@ -94,13 +94,13 @@
 		<a class="btn btn-primary"
 			href="<c:url value="/quan-tri/danh-sach-sach"></c:url>">Quay về
 			danh sách</a> | <a class="btn btn-success"
-			href="<c:url value="/quan-tri/chinh-sua-sach/${ bookInfo.ID }"></c:url>">Chỉnh
+			href="<c:url value="/quan-tri/chinh-sua-sach/${ bookInfo.id }"></c:url>">Chỉnh
 			sửa</a> | <a class="btn btn-success"
-			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ bookInfo.ID }"></c:url>">Hình
+			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ bookInfo.id }"></c:url>">Hình
 			ảnh</a> | <a class="btn btn-success"
-			href="<c:url value="/quan-tri/pdf-cua-sach/${ bookInfo.ID }"></c:url>">PDF</a>
+			href="<c:url value="/quan-tri/pdf-cua-sach/${ bookInfo.id }"></c:url>">PDF</a>
 		| <a class="btn btn-success"
-			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ bookInfo.ID }"></c:url>">Tác
+			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ bookInfo.id }"></c:url>">Tác
 			giả</a>
 	</div>
 </div>

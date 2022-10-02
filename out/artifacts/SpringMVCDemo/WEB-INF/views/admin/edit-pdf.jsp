@@ -21,7 +21,7 @@
 					${ state }
 					<div>
 						<a class="text-white-50 small"
-							href="<c:url value="/quan-tri/pdf-cua-sach/${ book.ID }"></c:url>">Tắt
+							href="<c:url value="/quan-tri/pdf-cua-sach/${ book.id }"></c:url>">Tắt
 							thông báo này</a>
 					</div>
 				</div>
@@ -86,7 +86,7 @@
 							<td><c:url var="post_url" value="/quan-tri/xoa-pdf-cua-sach"></c:url>
 								<form:form id="deleteBookImage" method="POST"
 									action="${ post_url }">
-									<input type="hidden" name="id" value="${ book.ID }" />
+									<input type="hidden" name="id" value="${ book.id }" />
 									<button type="submit" class="btn btn-danger">Xóa</button>
 								</form:form></td>
 						</tr>
@@ -100,13 +100,13 @@
 		<a class="btn btn-primary"
 			href="<c:url value="/quan-tri/danh-sach-sach"></c:url>">Quay về
 			danh sách</a> <a class="btn btn-primary"
-			href="<c:url value="/quan-tri/chi-tiet-sach/${ book.ID }"></c:url>">Xem
+			href="<c:url value="/quan-tri/chi-tiet-sach/${ book.id }"></c:url>">Xem
 			chi tiết</a> <a class="btn btn-success"
-			href="<c:url value="/quan-tri/chinh-sua-sach/${ book.ID }"></c:url>">Chỉnh
+			href="<c:url value="/quan-tri/chinh-sua-sach/${ book.id }"></c:url>">Chỉnh
 			sửa</a> <a class="btn btn-success"
-			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ book.ID }"></c:url>">Hình
+			href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ book.id }"></c:url>">Hình
 			ảnh</a> <a class="btn btn-success"
-			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.ID }"></c:url>">Tác
+			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.id }"></c:url>">Tác
 			giả</a>
 	</div>
 </div>

@@ -52,22 +52,22 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label" for="categoryId">Chọn thể loại</label>
+					<label class="control-label" for="category.id">Chọn thể loại</label>
 					<div>
-						<form:select path="categoryId" cssClass="form-control">
-							<form:options items="${ categories }" itemValue="ID" itemLabel="name"></form:options>
+						<form:select path="category.id" cssClass="form-control">
+							<form:options items="${ categories }" itemValue="id" itemLabel="name"></form:options>
 						</form:select>
-						<form:errors path="categoryId" cssClass="field-validation-valid text-danger"/>
+						<form:errors path="category.id" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label" for="publishingHouseId">Chọn nhà xuất bản</label>
+					<label class="control-label" for="publishingHouse.id">Chọn nhà xuất bản</label>
 					<div>
-						<form:select path="publishingHouseId" cssClass="form-control">
-							<form:options items="${ publishingHouses }" itemValue="ID" itemLabel="name"></form:options>							
+						<form:select path="publishingHouse.id" cssClass="form-control">
+							<form:options items="${ publishingHouses }" itemValue="id" itemLabel="name"></form:options>
 						</form:select>
-						<form:errors path="publishingHouseId" cssClass="field-validation-valid text-danger"/>
+						<form:errors path="publishingHouse.id" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 

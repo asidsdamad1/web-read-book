@@ -1,5 +1,6 @@
 package com.example.springmvcdemo.dev.service.Impl;
 
+import com.example.springmvcdemo.dev.dto.AuthorDto;
 import com.example.springmvcdemo.dev.dto.BookAuthorDto;
 import com.example.springmvcdemo.dev.dto.BookDto;
 import com.example.springmvcdemo.dev.dto.RatingDto;
@@ -35,7 +36,7 @@ public class BookServiceImpl implements BookService {
 
             if (book.getImg().trim().length() == 0)
                 book.setImg("book-default.png");
-            dtos.add(new BookDto(book, true));
+            dtos.add(new BookDto(book, false));
         }
         return dtos;
     }
@@ -63,13 +64,13 @@ public class BookServiceImpl implements BookService {
                 entity.setImg("book-default.png");
             Category category = null;
             if (dto.getCategory() != null && dto.getCategory().getId() != null) {
-                category = categoryRepository.getById(dto.getCategory().getId());
+                category = categoryRepository.findById(dto.getCategory().getId()).get();
             }
             entity.setCategory(category);
 
             PublishingHouse publishingHouse = null;
-            if (dto.getCategory() != null && dto.getCategory().getId() != null) {
-                publishingHouse = publishingRepository.getById(dto.getPublishingHouse().getId());
+            if (dto.getPublishingHouse() != null && dto.getPublishingHouse().getId() != null) {
+                publishingHouse = publishingRepository.findById(dto.getCategory().getId()).get();
             }
             entity.setPublishingHouse(publishingHouse);
 
@@ -110,12 +111,12 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+
     @Override
     public BookDto getById(Integer bookId) {
         if (bookId != null) {
             Book entity = bookRepository.getById(bookId);
-            if (entity != null)
-                return new BookDto(entity, true);
+            return new BookDto(entity, true);
         }
         return null;
     }
@@ -123,8 +124,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean delete(Integer bookId) {
         if (bookId != null) {
-            bookRepository.deleteById(bookId);
-            return true;
+            Book book = bookRepository.findById(bookId).orElse(null);
+            if(book != null) {
+                bookRepository.delete(book);
+                return true;
+            }
         }
         return false;
     }
@@ -262,7 +266,7 @@ public class BookServiceImpl implements BookService {
             if (entity.getPdf().trim().length() == 0)
                 return false;
 
-            entity.setImg(null);
+            entity.setPdf(null);
             bookRepository.save(entity);
             return true;
         }
@@ -306,4 +310,6 @@ public class BookServiceImpl implements BookService {
     public int countBook() {
         return bookRepository.countBooks();
     }
+
+
 }
