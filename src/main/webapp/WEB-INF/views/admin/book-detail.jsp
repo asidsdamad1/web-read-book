@@ -34,9 +34,13 @@
 						</tr>
 						<tr>
 							<th style="width: 25%;">Thể loại</th>
-							<td><c:if test="${ bookInfo.category != null }">
-								${ bookInfo.category.name }
-								</c:if></td>
+							<td>
+								<ul>
+									<c:forEach var="item" items="${ bookInfo.bookFeatureds }">
+										<li>${ item.category.name }</li>
+									</c:forEach>
+								</ul>
+							</td>
 						</tr>
 						<tr>
 							<th style="width: 25%;">Nhà xuất bản</th>
@@ -48,7 +52,7 @@
 							<th style="width: 25%;">Tác giả</th>
 							<td>
 								<ul>
-									<c:forEach var="item" items="${ bookInfo.bookAuthorDtos }">
+									<c:forEach var="item" items="${ bookInfo.bookFeatureds }">
 										<li>${ item.author.name }</li>
 									</c:forEach>
 								</ul>

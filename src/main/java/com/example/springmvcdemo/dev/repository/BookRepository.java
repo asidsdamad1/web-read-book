@@ -6,10 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query("select e from Book e where e.id = ?1")
     Book getById(int bookId);
+
+    @Query("select distinct e from Book e where e.id = ?1")
+    Optional<Book> findByIdDistinct(int bookId);
 
     @Query("select e from Book e order by e.id desc")
     List<Book> getLastestBooks();
@@ -17,8 +21,8 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query("select e from Book e order by e.views desc ")
     List<Book> getBooksByViews();
 
-    @Query("select e from Book e where e.category.id = ?1")
-    List<Book> getBooksByCategory(int categoryId);
+//    @Query("select e from Book e where e.category.id = ?1")
+//    List<Book> getBooksByCategory(int categoryId);
 
     @Query("select e from Book e where e.name like ?1")
     List<Book> getBooksByKeyword(String key);

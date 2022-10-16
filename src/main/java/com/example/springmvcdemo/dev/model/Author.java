@@ -1,8 +1,18 @@
 package com.example.springmvcdemo.dev.model;
 
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Author")
 public class Author extends BaseObject{
@@ -19,52 +29,7 @@ public class Author extends BaseObject{
     @OneToMany(mappedBy = "author")
     private List<BookAuthor> listBook;
 
-    public Author() {
-
-    }
-
-
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<BookAuthor> getListBook() {
-        return listBook;
-    }
-
-    public void setListBook(List<BookAuthor> listBook) {
-        this.listBook = listBook;
-    }
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private Set<BookFeatured> bookFeatureds;
 }

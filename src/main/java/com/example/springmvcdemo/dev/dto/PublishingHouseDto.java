@@ -27,7 +27,7 @@ public class PublishingHouseDto extends BaseObjectDto{
                 if(entity.getListBook() != null) {
                     this.bookDtoList = new ArrayList<>();
                     for(Book book : entity.getListBook()) {
-                        this.bookDtoList.add(new BookDto(book, true));
+                        this.bookDtoList.add(new BookDto(book, false));
                     }
                 }
             }

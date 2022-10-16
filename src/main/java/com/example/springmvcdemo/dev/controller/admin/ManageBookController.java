@@ -1,8 +1,8 @@
 package com.example.springmvcdemo.dev.controller.admin;
 
 import com.example.springmvcdemo.dev.dto.*;
-import com.example.springmvcdemo.dev.model.BookAuthor;
 import com.example.springmvcdemo.dev.service.*;
+import com.example.springmvcdemo.dev.service.Impl.LoginServiceImpl;
 import com.example.springmvcdemo.dev.validator.BookValidator;
 import com.example.springmvcdemo.dev.validator.ImageUploadValidator;
 import com.example.springmvcdemo.dev.validator.PdfUploadValidator;
@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+
+import static com.example.springmvcdemo.dev.service.Impl.LoginServiceImpl.loginState;
 
 @Controller
 @RequestMapping("/quan-tri")
@@ -38,20 +40,14 @@ public class ManageBookController {
 
     @RequestMapping(value = {"/danh-sach-sach", "/danh-sach-sach/{message}"}, method = RequestMethod.GET)
     public ModelAndView getAll(HttpSession httpSession, @PathVariable(required = false) String message) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/book-list");
         String username = loginState.replace("logged:true;username:", "").replace(";role:Admin", "");
         modelAndView.addObject("username", username);
         modelAndView.addObject("books", bookService.getAll());
-//        modelAndView.addObject("authors", bookService.getAll());
         if (message != null) {
             if (message.equals("delete-success"))
                 modelAndView.addObject("state", "Xoá thành công");
@@ -65,13 +61,8 @@ public class ManageBookController {
 
     @RequestMapping(value = {"/chi-tiet-sach/{id}"}, method = RequestMethod.GET)
     public ModelAndView bookDetail(HttpSession httpSession, @PathVariable int id) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if( LoginServiceImpl.login(httpSession) !=  null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/quan-tri/danh-sach-sach");
@@ -90,13 +81,8 @@ public class ManageBookController {
 
     @RequestMapping(value = {"/tao-moi-sach", "/tao-moi-sach/{message}"}, method = RequestMethod.GET)
     public ModelAndView create(HttpSession httpSession, @PathVariable(required = false) String message) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/create-book");
@@ -104,6 +90,7 @@ public class ManageBookController {
         modelAndView.addObject("username", username);
         modelAndView.addObject("book", new BookDto());
         modelAndView.addObject("categories", categoryService.getAll());
+        modelAndView.addObject("authors", authorService.getAll());
         modelAndView.addObject("publishingHouses", publishingHouseService.getAll());
         if (message != null) {
             if (message.equals("add-success"))
@@ -119,13 +106,8 @@ public class ManageBookController {
     @RequestMapping(value = {"/tao-moi-sach"}, method = RequestMethod.POST)
     public ModelAndView create(HttpSession httpSession, @ModelAttribute("book") BookDto book,
                                BindingResult bindingResult, BookValidator bookValidator) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         bookValidator.validate(book, bindingResult);
 
@@ -136,6 +118,7 @@ public class ManageBookController {
             modelAndView.addObject("username", username);
             modelAndView.addObject("book", book);
             modelAndView.addObject("categories", categoryService.getAll());
+            modelAndView.addObject("authors", authorService.getAll());
             modelAndView.addObject("publishingHouses", publishingHouseService.getAll());
             return modelAndView;
         }
@@ -148,13 +131,8 @@ public class ManageBookController {
 
     @RequestMapping(value = {"/chinh-sua-sach/{id}", "/chinh-sua-sach/{id}/{message}"}, method = RequestMethod.GET)
     public ModelAndView update(HttpSession httpSession, @PathVariable int id, @PathVariable(required = false) String message) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/quan-tri/danh-sach-sach");
@@ -184,13 +162,8 @@ public class ManageBookController {
     @RequestMapping(value = {"/chinh-sua-sach/{id}"}, method = RequestMethod.POST)
     public ModelAndView bookDetail(HttpSession httpSession, @ModelAttribute("book") BookDto book,
                                    BindingResult bindingResult, BookValidator bookValidator) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         bookValidator.validate(book, bindingResult);
 
@@ -213,13 +186,8 @@ public class ManageBookController {
 
     @RequestMapping(value = "/xoa-sach", method = RequestMethod.POST)
     public ModelAndView delete(HttpSession httpSession, @RequestParam(value = "id") int id) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/quan-tri/danh-sach-sach");
@@ -232,13 +200,8 @@ public class ManageBookController {
 
     @RequestMapping(value = {"/hinh-anh-cua-sach/{id}", "/hinh-anh-cua-sach/{id}/{message}"}, method = RequestMethod.GET)
     public ModelAndView editImg(HttpSession httpSession, @PathVariable int id, @PathVariable(required = false) String message) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         BookDto book = bookService.getById(id);
         if (book == null)
@@ -278,13 +241,8 @@ public class ManageBookController {
                                  BindingResult bindingResult,
                                  ImageUploadValidator imageUploadValidator) {
 
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
 
         BookDto book = bookService.getById(imageUpload.getBookId());
@@ -323,13 +281,8 @@ public class ManageBookController {
     @RequestMapping(value = "/xoa-hinh-anh-cua-sach", method = RequestMethod.POST)
     public ModelAndView deleteImg(HttpSession httpSession, @RequestParam(value = "id") int id) {
 
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/tai-khoan/dang-nhap");
@@ -352,15 +305,10 @@ public class ManageBookController {
         return new ModelAndView("redirect:/quan-tri/hinh-anh-cua-sach/" + id + "/delete-failed");
     }
 
-            @RequestMapping(value = {"/pdf-cua-sach/{id}", "/pdf-cua-sach/{id}/{message}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/pdf-cua-sach/{id}", "/pdf-cua-sach/{id}/{message}"}, method = RequestMethod.GET)
     public ModelAndView editPdf(HttpSession httpSession, @PathVariable int id, @PathVariable(required = false) String message) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/quan-tri/danh-sach-sach");
@@ -403,13 +351,8 @@ public class ManageBookController {
                                BindingResult bindingResult,
                                PdfUploadValidator pdfUploadValidator) {
 
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
 
         BookDto book = bookService.getById(pdfUpload.getBookId());
@@ -447,14 +390,8 @@ public class ManageBookController {
 
     @RequestMapping(value = "/xoa-pdf-cua-sach", method = RequestMethod.POST)
     public ModelAndView deletePdf(HttpSession httpSession, @RequestParam(value = "id") int id) {
-
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/tai-khoan/dang-nhap");
@@ -479,13 +416,8 @@ public class ManageBookController {
 
     @RequestMapping(value = {"/tac-gia-cua-sach/{id}", "/tac-gia-cua-sach/{id}/{message}"}, method = RequestMethod.GET)
     public ModelAndView EditBookAuthor(HttpSession httpSession, @PathVariable int id, @PathVariable(required = false) String message) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         if (id <= 0)
             return new ModelAndView("redirect:/quan-tri/danh-sach-sach");
@@ -518,13 +450,8 @@ public class ManageBookController {
 
     @RequestMapping(value = "/them-tac-gia-cua-sach", method = RequestMethod.POST)
     public ModelAndView addBookAuthor(HttpSession httpSession, @ModelAttribute("authorContribute") BookAuthorDto bookAuthorDto) {
-        Object obj = httpSession.getAttribute("loginState");
-        if (obj == null)
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
-
-        String loginState = obj.toString();
-        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
-            return new ModelAndView("redirect:/tai-khoan/dang-nhap");
+        if (LoginServiceImpl.login(httpSession) != null)
+            return LoginServiceImpl.login(httpSession);
 
         BookDto bookDto = bookAuthorService.addBookAuthor(bookAuthorDto);
         if (bookDto != null)
@@ -536,19 +463,19 @@ public class ManageBookController {
     @RequestMapping(value = "/xoa-tac-gia-cua-sach", method = RequestMethod.POST)
     public ModelAndView deleteAuthor(HttpSession httpSession, @RequestParam(value = "id") Integer id) {
         Object obj = httpSession.getAttribute("loginState");
-        if(obj == null)
+        if (obj == null)
             return new ModelAndView("redirect:/tai-khoan/dang-nhap");
 
         String loginState = obj.toString();
-        if(!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
+        if (!loginState.matches("logged:true;username:([a-zA-Z0-9]{1,});role:Admin"))
             return new ModelAndView("redirect:/tai-khoan/dang-nhap");
 
-        if(id <= 0)
+        if (id <= 0)
             return new ModelAndView("redirect:/quan-tri/danh-sach-sach");
 
         AuthorDto dto = authorService.getById(id);
         BookDto book = bookAuthorService.getBookByAuthor(dto);
-        if(bookAuthorService.deleteByAuthorId(id))
+        if (bookAuthorService.deleteByAuthorId(id))
             return new ModelAndView("redirect:/quan-tri/tac-gia-cua-sach/" + book.getId() + "/delete-success");
 
         return new ModelAndView("redirect:/quan-tri/tac-gia-cua-sach/" + book.getId() + "/delete-failed");

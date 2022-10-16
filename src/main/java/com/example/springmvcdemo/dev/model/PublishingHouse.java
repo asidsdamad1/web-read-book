@@ -1,14 +1,21 @@
 package com.example.springmvcdemo.dev.model;
 
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "PublishingHouse")
 public class PublishingHouse extends BaseObject{
-
-
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -18,51 +25,8 @@ public class PublishingHouse extends BaseObject{
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "publishingHouse")
-    private List<Book> listBook = new ArrayList<Book>();
+    @OneToMany(mappedBy = "publishingHouse", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Book> listBook;
 
-    public PublishingHouse() {
-    }
-
-
-    public List<Book> getListBook() {
-        return listBook;
-    }
-
-    public void setListBook(List<Book> listBook) {
-        this.listBook = listBook;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

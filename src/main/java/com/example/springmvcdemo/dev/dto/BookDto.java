@@ -1,17 +1,30 @@
 package com.example.springmvcdemo.dev.dto;
 
-import com.example.springmvcdemo.dev.model.Author;
+import com.example.springmvcdemo.common.Constants;
 import com.example.springmvcdemo.dev.model.Book;
 import com.example.springmvcdemo.dev.model.BookAuthor;
+import com.example.springmvcdemo.dev.model.BookFeatured;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class BookDto extends BaseObjectDto {
     private String name;
     private String description;
     private PublishingHouseDto publishingHouse;
     private List<BookAuthorDto> bookAuthorDtos;
+    private List<BookFeaturedDto> bookFeatureds;
+    private Set<AuthorDto> authorDtos;
+    private Set<Integer> categoryIds;
+    private Set<Integer> authorIds;
     private long views;
     private long upvote;
     private long downvote;
@@ -19,10 +32,7 @@ public class BookDto extends BaseObjectDto {
     private String pdf;
     private String img;
     private CategoryDto category;
-
-
-    public BookDto() {
-    }
+    private AuthorDto author;
 
     public BookDto(Book entity) {
         this(entity, true);
@@ -31,16 +41,14 @@ public class BookDto extends BaseObjectDto {
     public BookDto(Book entity, boolean simple) {
         if (entity != null) {
             this.id = entity.getId();
-            this.name = entity.getBookName();
+            this.name = entity.getName();
             this.description = entity.getDescription();
             this.views = entity.getViews();
             this.upvote = entity.getUpvote();
             this.downvote = entity.getDownvote();
             this.pdf = entity.getPdf();
             this.img = entity.getImg();
-            if (entity.getCategory() != null) {
-                this.category = new CategoryDto(entity.getCategory(), false);
-            }
+
             if (entity.getPublishingHouse() != null) {
                 this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), false);
             }
@@ -51,6 +59,16 @@ public class BookDto extends BaseObjectDto {
                         this.bookAuthorDtos.add(new BookAuthorDto(item));
                     }
                 }
+                if (entity.getBookFeatureds() != null && entity.getBookFeatureds().size() > 0) {
+                    this.bookFeatureds = new ArrayList<>();
+                    this.bookFeatureds.add(new BookFeaturedDto(entity.getBookFeatureds().get(0)));
+                    for (BookFeatured item : entity.getBookFeatureds()) {
+                        if (!Objects.equals(item.getAuthor().getName(), this.bookFeatureds.get(0).getAuthor().getName())
+                                && !Objects.equals(item.getCategory().getCategoryName(), this.bookFeatureds.get(0).getCategory().getName())) {
+                            this.bookFeatureds.add(new BookFeaturedDto(item));
+                        }
+                    }
+                }
             }
         }
     }
@@ -58,7 +76,7 @@ public class BookDto extends BaseObjectDto {
     public BookDto(Book entity, RatingDto ratingDto, boolean simple) {
         if (entity != null) {
             this.id = entity.getId();
-            this.name = entity.getBookName();
+            this.name = entity.getName();
             this.description = entity.getDescription();
             this.views = entity.getViews();
             this.upvote = entity.getUpvote();
@@ -66,9 +84,6 @@ public class BookDto extends BaseObjectDto {
             this.pdf = entity.getPdf();
             this.img = entity.getImg();
             this.star = ratingDto.SolveStar();
-            if (entity.getCategory() != null) {
-                this.category = new CategoryDto(entity.getCategory(), true);
-            }
             if (entity.getPublishingHouse() != null) {
                 this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), true);
             }
@@ -83,92 +98,11 @@ public class BookDto extends BaseObjectDto {
         }
     }
 
-
-    public String getName() {
-        return name;
+    public static Book toEntity(BookDto dto) {
+        return Constants.map().convertValue(dto, Book.class);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public PublishingHouseDto getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(PublishingHouseDto publishingHouse) {
-        this.publishingHouse = publishingHouse;
-    }
-
-    public List<BookAuthorDto> getBookAuthorDtos() {
-        return bookAuthorDtos;
-    }
-
-    public void setBookAuthorDtos(List<BookAuthorDto> bookAuthorDtos) {
-        this.bookAuthorDtos = bookAuthorDtos;
-    }
-
-    public long getViews() {
-        return views;
-    }
-
-    public void setViews(long views) {
-        this.views = views;
-    }
-
-    public long getUpvote() {
-        return upvote;
-    }
-
-    public void setUpvote(long upvote) {
-        this.upvote = upvote;
-    }
-
-    public long getDownvote() {
-        return downvote;
-    }
-
-    public void setDownvote(long downvote) {
-        this.downvote = downvote;
-    }
-
-    public int getStar() {
-        return star;
-    }
-
-    public void setStar(int star) {
-        this.star = star;
-    }
-
-    public String getPdf() {
-        return pdf;
-    }
-
-    public void setPdf(String pdf) {
-        this.pdf = pdf;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public CategoryDto getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryDto category) {
-        this.category = category;
+    public static BookDto of(Book entity) {
+        return Constants.map().convertValue(entity, BookDto.class);
     }
 }

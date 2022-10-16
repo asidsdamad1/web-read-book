@@ -19,8 +19,6 @@ public class BookValidator implements Validator {
         if(book.getName().trim().length() < 3 || book.getName().trim().length() > 50)
             errors.rejectValue("name", "", "Tên sách phải có độ dài lớn hơn 3 và nhỏ hơn 50 ký tự");
 
-        if(book.getCategory() == null)
-            errors.rejectValue("category", "", "Thể loại không hợp lệ");
 
         if(book.getPublishingHouse() == null)
             errors.rejectValue("publishingHouse", "", "Nhà xuất bản không hợp lệ");

@@ -1,8 +1,15 @@
 package com.example.springmvcdemo.dev.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Role")
 public class Role extends BaseObject{
@@ -13,24 +20,4 @@ public class Role extends BaseObject{
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
-    public Role() {
-    }
-
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }

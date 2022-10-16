@@ -28,6 +28,20 @@
 <!-- Custom styles for this template-->
 <link href="<c:url value="/assets/admin/css/sb-admin-2.min.css"></c:url>" rel="stylesheet">
 <script src="<c:url value="/assets/pdfjs/build/pdf.js"></c:url>"></script>
+
+<link rel="stylesheet" href="<c:url value="/assets/admin/css/mobiscroll.javascript.min.css"></c:url>" >
+<script src="<c:url value="/assets/admin/js/mobiscroll.javascript.min.js"></c:url>"></script>
+
+<script>
+	// Ignore this in your implementation
+	window.isMbscDemo = true;
+</script>
+
+	<style type="text/css">
+		.mbsc-page {
+			padding: 1em;
+		}
+	</style>
 </head>
 
 <body id="page-top">

@@ -1,23 +1,22 @@
 package com.example.springmvcdemo.dev.dto;
 
-import com.example.springmvcdemo.dev.model.Book;
 import com.example.springmvcdemo.dev.model.BookAuthor;
 
-public class BookAuthorDto extends BaseObjectDto{
+public class BookAuthorDto extends BaseObjectDto {
     private int bookId;
     private int authorId;
     private BookDto book;
-    private AuthorDto  author;
+    private AuthorDto author;
 
     public BookAuthorDto() {
     }
 
     public BookAuthorDto(BookAuthor entity) {
-        if(entity != null) {
-            if(entity.getBook() !=null) {
+        if (entity != null) {
+            if (entity.getBook() != null) {
                 this.book = new BookDto(entity.getBook(), false);
             }
-            if(entity.getAuthor() !=null) {
+            if (entity.getAuthor() != null) {
                 this.author = new AuthorDto(entity.getAuthor(), false);
             }
         }

@@ -1,30 +1,26 @@
 package com.example.springmvcdemo.dev.service.Impl;
 
-import com.example.springmvcdemo.dev.dto.AuthorDto;
-import com.example.springmvcdemo.dev.dto.BookAuthorDto;
 import com.example.springmvcdemo.dev.dto.BookDto;
+import com.example.springmvcdemo.dev.dto.CategoryDto;
 import com.example.springmvcdemo.dev.dto.RatingDto;
 import com.example.springmvcdemo.dev.model.*;
 import com.example.springmvcdemo.dev.repository.*;
 import com.example.springmvcdemo.dev.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-    @Autowired
-    private BookRepository bookRepository;
-    @Autowired
-    private AuthorRepository authorRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private PublishingHouseRepository publishingRepository;
-    @Autowired
-    private BookAuthorRepository bookAuthorRepository;
+    private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+    private final CategoryRepository categoryRepository;
+    private final PublishingHouseRepository publishingRepository;
+    private final BookAuthorRepository bookAuthorRepository;
+    private final BookFeaturedRepository bookFeaturedRepository;
 
     @Override
     public List<BookDto> getAll() {
@@ -50,7 +46,7 @@ public class BookServiceImpl implements BookService {
             if (entity == null)
                 entity = new Book();
 
-            entity.setBookName(dto.getName());
+            entity.setName(dto.getName());
             entity.setDescription(dto.getDescription());
             entity.setViews(dto.getViews());
             entity.setUpvote(dto.getUpvote());
@@ -62,51 +58,50 @@ public class BookServiceImpl implements BookService {
 
             if (entity.getImg().trim().length() == 0)
                 entity.setImg("book-default.png");
-            Category category = null;
-            if (dto.getCategory() != null && dto.getCategory().getId() != null) {
-                category = categoryRepository.findById(dto.getCategory().getId()).get();
-            }
-            entity.setCategory(category);
+
 
             PublishingHouse publishingHouse = null;
             if (dto.getPublishingHouse() != null && dto.getPublishingHouse().getId() != null) {
-                publishingHouse = publishingRepository.findById(dto.getCategory().getId()).get();
+                publishingHouse = publishingRepository.findById(dto.getPublishingHouse().getId()).get();
             }
             entity.setPublishingHouse(publishingHouse);
 
-            List<BookAuthor> bookAuthors = new ArrayList<>();
-            if (dto.getBookAuthorDtos() != null && dto.getBookAuthorDtos().size() > 0) {
-                for (BookAuthorDto item : dto.getBookAuthorDtos()) {
-                    BookAuthor bookAuthor = null;
-                    if (item.getId() != null) {
-                        bookAuthor = bookAuthorRepository.getById(item.getId());
-                    }
-                    if (bookAuthor == null) {
-                        bookAuthor = new BookAuthor();
-                    }
-                    if (item.getAuthor() != null && item.getAuthor().getId() != null) {
-                        Author author = authorRepository.getById(item.getAuthor().getId());
-                        if (author != null) {
-                            bookAuthor.setAuthor(author);
-                            bookAuthor.setBook(entity);
+            List<BookFeatured> bookFeatures = new ArrayList<>();
+            if (dto.getCategoryIds() != null && dto.getAuthorIds() != null) {
 
-                            bookAuthors.add(bookAuthor);
-                        }
-                    }
 
+                // add category follow to author in book featured
+                for (Integer i : dto.getAuthorIds()) {
+                    Author author = authorRepository.findById(i).orElseThrow(null);
+
+                    for (Integer j : dto.getCategoryIds()) {
+                        BookFeatured bookFeatured = new BookFeatured();
+                        Category category1 = categoryRepository.findById(j).orElseThrow(null);
+
+                        bookFeatured.setAuthor(author);
+                        bookFeatured.setCategory(category1);
+
+                        bookFeatures.add(bookFeatured);
+                    }
                 }
+
             }
-            if (bookAuthors != null && bookAuthors.size() > 0) {
-                if (entity.getBookAuthors() == null) {
-                    entity.setBookAuthors(bookAuthors);
+            if (bookFeatures != null && bookFeatures.size() > 0) {
+                if (entity.getBookFeatureds() == null) {
+                    entity.setBookFeatureds(bookFeatures);
                 } else {
-                    entity.getBookAuthors().clear();
-                    entity.getBookAuthors().addAll(bookAuthors);
+                    entity.getBookFeatureds().clear();
+                    entity.getBookFeatureds().addAll(bookFeatures);
                 }
             }
 
             entity = bookRepository.save(entity);
-            return new BookDto(entity, true);
+            for (BookFeatured bookFeatured : bookFeatures) {
+                bookFeatured.setBook(entity);
+            }
+
+            bookFeaturedRepository.saveAll(bookFeatures);
+            return new BookDto(entity);
         }
         return null;
     }
@@ -114,18 +109,16 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getById(Integer bookId) {
-        if (bookId != null) {
-            Book entity = bookRepository.getById(bookId);
-            return new BookDto(entity, true);
-        }
-        return null;
+        Book book = bookRepository.findById(bookId).orElseThrow(null);
+
+        return new BookDto(book, true);
     }
 
     @Override
     public boolean delete(Integer bookId) {
         if (bookId != null) {
             Book book = bookRepository.findById(bookId).orElse(null);
-            if(book != null) {
+            if (book != null) {
                 bookRepository.delete(book);
                 return true;
             }
@@ -185,7 +178,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookDto> getBookByCategory(int id) {
-        List<Book> books = bookRepository.getBooksByCategory(id);
+        List<BookFeatured> bookFeatureds = bookFeaturedRepository.getBooksByCategory(id);
+        List<Book> books = new ArrayList<>();
+        for(BookFeatured bookFeatured  :  bookFeatureds) {
+            Book book = bookRepository.getById(bookFeatured.getId());
+            books.add(book);
+        }
         List<BookDto> bookDtos = new ArrayList<>();
         for (Book book : books) {
             if (book.getImg() == null)

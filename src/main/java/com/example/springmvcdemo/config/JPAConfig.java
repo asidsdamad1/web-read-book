@@ -58,6 +58,7 @@ public class JPAConfig {
         hibernateProperties.setProperty("hibernate.enable_lazy_load_no_trans", env.getProperty("hibernate.enable_lazy_load_no_trans"));
         hibernateProperties.setProperty("logging.level.org.hibernate.SQL", env.getProperty("logging.level.org.hibernate.SQL"));
         hibernateProperties.setProperty("logging.level.org.hibernate.type.descriptor.sql.BasicBinder", env.getProperty("logging.level.org.hibernate.type.descriptor.sql.BasicBinder"));
+        hibernateProperties.setProperty("hibernate.jdbc.batch_size", env.getProperty("hibernate.jdbc.batch_size"));
         return hibernateProperties;
     }
 

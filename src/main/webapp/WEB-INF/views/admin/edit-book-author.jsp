@@ -48,7 +48,6 @@
 								<option value="${ item.id }">${ item.name }</option>
 							</c:forEach>
 						</select>
-
 						<form:errors path="authorId" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>

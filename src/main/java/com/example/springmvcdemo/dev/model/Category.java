@@ -1,11 +1,19 @@
 package com.example.springmvcdemo.dev.model;
 
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Category")
 public class Category extends BaseObject{
@@ -15,35 +23,7 @@ public class Category extends BaseObject{
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL)
-    private List<Book> listBook = new ArrayList<Book>();
-
-    public Category() {
-    }
-
-
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Book> getListBook() {
-        return listBook;
-    }
-
-    public void setListBook(List<Book> listBook) {
-        this.listBook = listBook;
-    }
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<BookFeatured> bookFeatureds;
 }

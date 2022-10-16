@@ -47,12 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
                     setBookList.add(book);
                 }
             }
-            if (entity.getListBook() == null) {
-                entity.setListBook(setBookList);
-            } else {
 
-                entity.getListBook().addAll(setBookList);
-            }
 
             entity = catRepo.save(entity);
 

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookAuthorServiceImpl implements BookAuthorService {
@@ -51,15 +52,15 @@ public class BookAuthorServiceImpl implements BookAuthorService {
             AuthorDto authorDto = new AuthorDto(author, false);
             BookDto bookDto = new BookDto(book);
 
-            if (authorDto != null && bookDto.getBookAuthorDtos() != null) {
+            if (bookDto.getBookAuthorDtos() != null) {
                 for (BookAuthorDto dto : bookDto.getBookAuthorDtos())
-                    if (dto.getAuthor().getId() == authorDto.getId())
+                    if (Objects.equals(dto.getAuthor().getId(), authorDto.getId()))
                         return null;
             }
 
             List<BookAuthor> bookAuthors = new ArrayList<>();
             BookAuthor bookAuthor = null;
-            if (bookAuthorDto.getId() != null) {
+            if (bookAuthorDto.getId() != null) {    
                 bookAuthor = bookAuthorRepository.getById(bookAuthorDto.getId());
             }
             if (bookAuthor == null) {

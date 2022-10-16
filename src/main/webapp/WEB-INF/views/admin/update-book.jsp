@@ -60,16 +60,6 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="control-label" for="category.id">Chọn thể loại</label>
-					<div>
-						<form:select path="category.id" cssClass="form-control">
-							<form:options items="${ categories }" itemValue="id" itemLabel="name"></form:options>
-						</form:select>
-						<form:errors path="category.id" cssClass="field-validation-valid text-danger"/>
-					</div>
-				</div>
-				
-				<div class="form-group">
 					<label class="control-label" for="publishingHouse.id">Chọn nhà xuất bản</label>
 					<div>
 						<form:select path="publishingHouse.id" cssClass="form-control">
@@ -101,3 +91,4 @@
 			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.id }"></c:url>">Tác giả</a>
 	</div>
 </div>
+
