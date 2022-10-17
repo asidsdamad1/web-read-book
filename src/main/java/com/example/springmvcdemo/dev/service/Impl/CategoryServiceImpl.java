@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -73,6 +74,15 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto getById(int catalogId) {
         Category category = catRepo.findById(catalogId).get();
         return new CategoryDto(category, true);
+    }
+
+    @Override
+    public List<CategoryDto> getByBookId(Integer id) {
+        if(id != null) {
+            return catRepo.findAllByBookId(id)
+                    .stream().map(CategoryDto::of).collect(Collectors.toList());
+        }
+        return null;
     }
 
     @Override

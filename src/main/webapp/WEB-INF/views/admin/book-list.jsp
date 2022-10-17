@@ -71,20 +71,25 @@
                                         <input type="hidden" name="id" value="${ item.id }"/>
                                     </form:form>
                                     <a class="btn btn-success"
-                                       href="<c:url value="/quan-tri/chinh-sua-sach/${ item.id }"></c:url>">Chỉnh
-                                        sửa</a> |
+                                       href="<c:url value="/quan-tri/chinh-sua-sach/${ item.id }"></c:url>">
+                                        Chỉnh sửa </a> |
                                     <a class="btn btn-success"
-                                       href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ item.id }"></c:url>">Hình
-                                        ảnh</a> |
+                                       href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ item.id }"></c:url>">
+                                        Hình ảnh </a> |
                                     <a class="btn btn-success"
-                                       href="<c:url value="/quan-tri/pdf-cua-sach/${ item.id }"></c:url>">PDF</a> |
+                                       href="<c:url value="/quan-tri/pdf-cua-sach/${ item.id }"></c:url>">
+                                        PDF </a> |
                                     <a class="btn btn-success"
-                                       href="<c:url value="/quan-tri/tac-gia-cua-sach/${ item.id }"></c:url>">Tác
-                                        giả</a> |
+                                       href="<c:url value="/quan-tri/tac-gia-cua-sach/${ item.id }"></c:url>">
+                                        Tác giả </a> |
+                                    <a class="btn btn-success"
+                                       href="<c:url value="/quan-tri/the-loai-cua-sach/${ item.id }"></c:url>">
+                                        Thể loại </a> |
                                     <a class="btn btn-primary"
-                                       href="<c:url value="/quan-tri/chi-tiet-sach/${ item.id }"></c:url>">Xem chi
-                                        tiết</a> |
-                                    <button type="submit" class="btn btn-danger" form="deleteBook${ item.id }">Xóa
+                                       href="<c:url value="/quan-tri/chi-tiet-sach/${ item.id }"></c:url>">
+                                        Xem chi tiết </a> |
+                                    <button type="submit" class="btn btn-danger" form="deleteBook${ item.id }">
+                                        Xóa
                                     </button>
                                 </td>
                                 </tr>

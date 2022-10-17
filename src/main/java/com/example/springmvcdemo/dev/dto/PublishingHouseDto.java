@@ -1,36 +1,24 @@
 package com.example.springmvcdemo.dev.dto;
 
-import com.example.springmvcdemo.dev.model.Book;
 import com.example.springmvcdemo.dev.model.PublishingHouse;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class PublishingHouseDto extends BaseObjectDto{
+public class PublishingHouseDto extends BaseObjectDto {
     private String name;
     private String description;
     private String email;
     private String address;
-    private List<BookDto> bookDtoList;
 
     public PublishingHouseDto() {
     }
 
     public PublishingHouseDto(PublishingHouse entity, boolean simple) {
-        if(entity != null) {
+        if (entity != null) {
             this.id = entity.getId();
             this.name = entity.getName();
             this.description = entity.getDescription();
             this.email = entity.getEmail();
             this.address = entity.getAddress();
-            if(simple) {
-                if(entity.getListBook() != null) {
-                    this.bookDtoList = new ArrayList<>();
-                    for(Book book : entity.getListBook()) {
-                        this.bookDtoList.add(new BookDto(book, false));
-                    }
-                }
-            }
+
         }
     }
 

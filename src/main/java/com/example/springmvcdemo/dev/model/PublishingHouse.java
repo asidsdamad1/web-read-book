@@ -25,7 +25,7 @@ public class PublishingHouse extends BaseObject{
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "publishingHouse", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "publishingHouse", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @Fetch(FetchMode.SUBSELECT)
     private List<Book> listBook;
 

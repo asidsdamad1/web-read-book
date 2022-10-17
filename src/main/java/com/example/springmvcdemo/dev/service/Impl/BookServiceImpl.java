@@ -1,7 +1,6 @@
 package com.example.springmvcdemo.dev.service.Impl;
 
 import com.example.springmvcdemo.dev.dto.BookDto;
-import com.example.springmvcdemo.dev.dto.CategoryDto;
 import com.example.springmvcdemo.dev.dto.RatingDto;
 import com.example.springmvcdemo.dev.model.*;
 import com.example.springmvcdemo.dev.repository.*;
@@ -110,7 +109,56 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto getById(Integer bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(null);
+        List<BookFeatured> bookFeatureds = new ArrayList<>();
+        List<Author> authors = authorRepository.findAllByBookId(bookId);
+        List<Category> categories = categoryRepository.findAllByBookId(bookId);
+        for (Author author : authors) {
+            BookFeatured featured = new BookFeatured();
+            featured.setBook(book);
+            featured.setAuthor(author);
+            featured.setCategory(null);
+            bookFeatureds.add(featured);
+        }
 
+        for (Category category : categories) {
+            BookFeatured featured = new BookFeatured();
+            featured.setBook(book);
+            featured.setAuthor(null);
+            featured.setCategory(category);
+            bookFeatureds.add(featured);
+        }
+
+        book.setBookFeatureds(bookFeatureds);
+        return new BookDto(book, true);
+    }
+
+    @Override
+    public BookDto getByIdAndType(Integer bookId, int type) {
+        Book book = bookRepository.findById(bookId).orElseThrow(null);
+        List<Author> authors = authorRepository.findAllByBookId(bookId);
+        List<Category> categories = categoryRepository.findAllByBookId(bookId);
+        List<BookFeatured> bookFeatureds = new ArrayList<>();
+
+        if (type == 1) {
+            for (Author author : authors) {
+                BookFeatured featured = new BookFeatured();
+                featured.setBook(book);
+                featured.setAuthor(author);
+                featured.setCategory(null);
+                bookFeatureds.add(featured);
+            }
+        }
+
+        if (type == 2) {
+            for (Category category : categories) {
+                BookFeatured featured = new BookFeatured();
+                featured.setBook(book);
+                featured.setAuthor(null);
+                featured.setCategory(category);
+                bookFeatureds.add(featured);
+            }
+        }
+        book.setBookFeatureds(bookFeatureds);
         return new BookDto(book, true);
     }
 
@@ -180,7 +228,7 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getBookByCategory(int id) {
         List<BookFeatured> bookFeatureds = bookFeaturedRepository.getBooksByCategory(id);
         List<Book> books = new ArrayList<>();
-        for(BookFeatured bookFeatured  :  bookFeatureds) {
+        for (BookFeatured bookFeatured : bookFeatureds) {
             Book book = bookRepository.getById(bookFeatured.getId());
             books.add(book);
         }

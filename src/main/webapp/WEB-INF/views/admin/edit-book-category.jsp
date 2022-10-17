@@ -5,7 +5,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Trang quản trị/Thêm tác giả cho
+    <h1 class="h3 mb-0 text-gray-800">Trang quản trị/Thêm thể loại cho
         sách</h1>
     <a href="<c:url value="/quan-tri/tao-moi-sach"></c:url>"
        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -21,7 +21,7 @@
                         ${ state }
                     <div>
                         <a class="text-white-50 small"
-                           href="<c:url value="/quan-tri/tac-gia-cua-sach/${book.id}"></c:url>">Tắt
+                           href="<c:url value="/quan-tri/the-loai-cua-sach/${book.id}"></c:url>">Tắt
                             thông báo này</a>
                     </div>
                 </div>
@@ -32,23 +32,23 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Thêm tác giả cho sách "${ book.name }"</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Thêm thể loại cho sách "${ book.name }"</h6>
     </div>
     <div class="card-body">
-        <c:url var="post_url" value="/quan-tri/them-tac-gia-cua-sach"></c:url>
-        <form:form method="POST" action="${ post_url }" modelAttribute="authorContribute">
+        <c:url var="post_url" value="/quan-tri/them-the-loai-cua-sach"></c:url>
+        <form:form method="POST" action="${ post_url }" modelAttribute="categoryContribute">
             <div class="form-horizontal">
 
                 <input type="hidden" name="bookId" path="bookId" value="${ book.id }"/>
                 <div class="form-group">
-                    <label class="control-label" for="authorId">Chọn tác giả</label>
+                    <label class="control-label" for="categoryId">Chọn thể loại</label>
                     <div>
-                        <select name="authorId" id="authorId" class="form-control">
-                            <c:forEach var="item" items="${ author }">
+                        <select name="categoryId" id="categoryId" class="form-control">
+                            <c:forEach var="item" items="${ category }">
                                 <option value="${ item.id }">${ item.name }</option>
                             </c:forEach>
                         </select>
-                        <form:errors path="authorId" cssClass="field-validation-valid text-danger"/>
+                        <form:errors path="categoryId" cssClass="field-validation-valid text-danger"/>
                     </div>
                 </div>
 
@@ -63,13 +63,13 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Thêm tác giả" class="btn btn-success">
+                        <input type="submit" value="Thêm thể loại" class="btn btn-success">
                     </div>
                 </div>
             </div>
         </form:form>
 
-        <h6 class="m-0 font-weight-bold text-primary">Tác giả hiện tại
+        <h6 class="m-0 font-weight-bold text-primary">Thể loại hiện tại
             của sách</h6>
 
         <div class="table-responsive">
@@ -78,13 +78,13 @@
                     <tbody>
                     <c:forEach var="item" items="${ book.bookFeatureds }">
                         <tr>
-                            <c:if test="${item.author !=  null}">
-                                <td>${ item.author.name }</td>
-                                <td><c:url var="post_url" value="/quan-tri/xoa-tac-gia-cua-sach"></c:url>
-                                    <form:form id="deleteBookAuthor" method="POST"
+                            <c:if test="${item.category !=  null}">
+                                <td>${ item.category.name }</td>
+                                <td><c:url var="post_url" value="/quan-tri/xoa-the-loai-cua-sach"></c:url>
+                                    <form:form id="deleteBookCategory" method="POST"
                                                action="${ post_url }">
                                         <input type="hidden" name="bookId" value="${ book.id }"/>
-                                        <input type="hidden" name="id" value="${ item.author.id }"/>
+                                        <input type="hidden" name="id" value="${ item.category.id }"/>
                                         <button type="submit" class="btn btn-danger">Xóa</button>
                                     </form:form>
                                 </td>
@@ -93,8 +93,8 @@
                         </tr>
                     </c:forEach>
                     <%--						<tr>--%>
-                    <%--							<th style="width: 25%;">Xóa tác giả</th>--%>
-                    <%--							<td><c:url var="post_url" value="/quan-tri/xoa-tat-ca-tac-gia-cua-sach"></c:url>--%>
+                    <%--							<th style="width: 25%;">Xóa thể loại</th>--%>
+                    <%--							<td><c:url var="post_url" value="/quan-tri/xoa-tat-ca-the-loai-cua-sach"></c:url>--%>
                     <%--								<form:form id="deleteBookAuthor" method="POST"--%>
                     <%--									action="${ post_url }">--%>
                     <%--									<input type="hidden" name="id" value="${ book.id }" />--%>
@@ -121,6 +121,6 @@
         <a class="btn btn-success"
            href="<c:url value="/quan-tri/pdf-cua-sach/${ book.id }"></c:url>">PDF</a>
         <a class="btn btn-success"
-           href="<c:url value="/quan-tri/the-loai-cua-sach/${ book.id }"></c:url>">Thể loại </a>
+           href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.id }"></c:url>">Tác giả </a>
     </div>
 </div>

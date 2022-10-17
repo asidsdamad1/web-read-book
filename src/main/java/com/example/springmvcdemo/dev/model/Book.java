@@ -1,5 +1,6 @@
 package com.example.springmvcdemo.dev.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -35,10 +36,10 @@ public class Book extends BaseObject{
     @JoinColumn(name = "publishingHouseId")
     private PublishingHouse publishingHouse;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<BookAuthor> bookAuthors;
 
-    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<BookFeatured> bookFeatureds;
 }

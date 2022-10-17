@@ -10,7 +10,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -61,12 +60,8 @@ public class BookDto extends BaseObjectDto {
                 }
                 if (entity.getBookFeatureds() != null && entity.getBookFeatureds().size() > 0) {
                     this.bookFeatureds = new ArrayList<>();
-                    this.bookFeatureds.add(new BookFeaturedDto(entity.getBookFeatureds().get(0)));
                     for (BookFeatured item : entity.getBookFeatureds()) {
-                        if (!Objects.equals(item.getAuthor().getName(), this.bookFeatureds.get(0).getAuthor().getName())
-                                && !Objects.equals(item.getCategory().getCategoryName(), this.bookFeatureds.get(0).getCategory().getName())) {
-                            this.bookFeatureds.add(new BookFeaturedDto(item));
-                        }
+                        this.bookFeatureds.add(new BookFeaturedDto(item));
                     }
                 }
             }

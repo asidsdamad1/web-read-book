@@ -29,7 +29,7 @@ public class Author extends BaseObject{
     @OneToMany(mappedBy = "author")
     private List<BookAuthor> listBook;
 
-    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private Set<BookFeatured> bookFeatureds;
 }

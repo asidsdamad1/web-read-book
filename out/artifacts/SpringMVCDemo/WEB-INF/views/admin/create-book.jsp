@@ -50,7 +50,7 @@
 						<form:textarea path="description" cssClass="form-control" />
 					</div>
 				</div>
-				
+<%--				mbsc-input--%>
 				<div class="form-group">
 					<label class="control-label w-100">
 						Chọn thể loại
@@ -60,7 +60,7 @@
 						<form:select id="multiple-select" path="categoryIds" cssClass="form-control" multiple="true">
 							<form:options items="${ categories }" itemValue="id" itemLabel="name"/>
 						</form:select>
-						<form:errors path="category.id" cssClass="field-validation-valid text-danger"/>
+						<form:errors path="category" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 
@@ -73,7 +73,7 @@
 						<form:select id="multiple-select-author" path="authorIds" cssClass="form-control" multiple="true">
 							<form:options items="${ authors }" itemValue="id" itemLabel="name"/>
 						</form:select>
-						<form:errors path="author.id" cssClass="field-validation-valid text-danger"/>
+						<form:errors path="author" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 				
@@ -104,18 +104,12 @@
 <script>
 	mobiscroll.select('#multiple-select', {
 		inputElement: document.getElementById('my-input'),
-		touchUi: false,
-		onChange: function(ev, inst) {
-			console.log(ev.value); // the selected user object
-		},
+		touchUi: false
 	});
 
 	mobiscroll.select('#multiple-select-author', {
 		inputElement: document.getElementById('author-input'),
-		touchUi: false,
-		onChange: function(ev, inst) {
-			console.log(ev.value); // the selected user object
-		},
+		touchUi: false
 	});
 
 </script>

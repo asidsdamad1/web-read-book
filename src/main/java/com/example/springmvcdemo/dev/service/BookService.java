@@ -14,7 +14,7 @@ public interface BookService {
 
     BookDto saveOrUpdate(BookDto dto, Integer id);
 
-
+    BookDto getByIdAndType(Integer bookId, int type);
 
     BookDto getById(Integer bookId);
 

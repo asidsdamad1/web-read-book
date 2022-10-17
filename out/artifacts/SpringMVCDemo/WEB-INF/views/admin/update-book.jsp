@@ -58,14 +58,29 @@
 						<form:textarea path="description" cssClass="form-control" />
 					</div>
 				</div>
-				
 				<div class="form-group">
-					<label class="control-label" for="category.id">Chọn thể loại</label>
+					<label class="control-label w-100">
+						Chọn thể loại
+						<input class="form-control text-box single-line w-100"  form="categoryIds" id="my-input" data-dropdown="true" data-tags="true" />
+					</label>
 					<div>
-						<form:select path="category.id" cssClass="form-control">
-							<form:options items="${ categories }" itemValue="id" itemLabel="name"></form:options>
+						<form:select id="multiple-select" path="categoryIds" cssClass="form-control" multiple="true">
+							<form:options items="${ categories }" itemValue="id" itemLabel="name"/>
 						</form:select>
 						<form:errors path="category.id" cssClass="field-validation-valid text-danger"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label w-100">
+						Chọn tác giả
+						<input class="form-control text-box single-line w-100"  form="authorIds" id="author-input" data-dropdown="true" data-tags="true" />
+					</label>
+					<div>
+						<form:select id="multiple-select-author" path="authorIds" cssClass="form-control" multiple="true">
+							<form:options items="${ authors }" itemValue="id" itemLabel="name"/>
+						</form:select>
+						<form:errors path="author.id" cssClass="field-validation-valid text-danger"/>
 					</div>
 				</div>
 				
@@ -101,3 +116,21 @@
 			href="<c:url value="/quan-tri/tac-gia-cua-sach/${ book.id }"></c:url>">Tác giả</a>
 	</div>
 </div>
+<script>
+	mobiscroll.select('#multiple-select', {
+		inputElement: document.getElementById('my-input'),
+		touchUi: false,
+		onChange: function(ev, inst) {
+			console.log(ev.value); // the selected user object
+		},
+	});
+
+	mobiscroll.select('#multiple-select-author', {
+		inputElement: document.getElementById('author-input'),
+		touchUi: false,
+		onChange: function(ev, inst) {
+			console.log(ev.value); // the selected user object
+		},
+	});
+
+</script>

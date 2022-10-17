@@ -23,7 +23,7 @@ public class Category extends BaseObject{
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<BookFeatured> bookFeatureds;
 }

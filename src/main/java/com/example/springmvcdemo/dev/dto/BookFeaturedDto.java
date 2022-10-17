@@ -11,12 +11,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class BookFeaturedDto extends BaseObjectDto {
+    private int bookId;
+    private int authorId;
+    private int categoryId;
     private BookDto book;
     private AuthorDto author;
     private CategoryDto category;
 
     public static BookFeaturedDto of(BookFeatured entity) {
         return Constants.map().convertValue(entity, BookFeaturedDto.class);
+    }
+
+    public static BookFeatured toEntity(BookFeaturedDto dto) {
+        return Constants.map().convertValue(dto, BookFeatured.class);
     }
 
     public BookFeaturedDto(BookFeatured entity) {

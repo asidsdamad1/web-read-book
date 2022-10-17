@@ -6,21 +6,24 @@ import com.example.springmvcdemo.dev.model.Author;
 import com.example.springmvcdemo.dev.model.BookAuthor;
 import com.example.springmvcdemo.dev.repository.AuthorRepository;
 import com.example.springmvcdemo.dev.repository.BookAuthorRepository;
+import com.example.springmvcdemo.dev.repository.BookFeaturedRepository;
 import com.example.springmvcdemo.dev.repository.BookRepository;
 import com.example.springmvcdemo.dev.service.AuthorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
-
-    @Autowired
-    private AuthorRepository authorRepository;
-    @Autowired
-    private BookAuthorRepository bookAuthorRepository;
+    private final AuthorRepository authorRepository;
+    private final BookFeaturedRepository bookFeaturedRepository;
 
     @Override
     public List<AuthorDto> getAll() {
@@ -62,11 +65,12 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorDto getByBookId(Integer id) {
+    public List<AuthorDto> getByBookId(Integer id) {
         if (id != null) {
-            BookAuthor entity = bookAuthorRepository.getBookAuthorByBookId(id);
+            return authorRepository.findAllByBookId(id)
+                    .stream().map(AuthorDto::of).collect(Collectors.toList()) ;
 
-            return new AuthorDto(entity.getAuthor());
+//            return new AuthorDto(entity.getAuthor());
         }
         return null;
     }

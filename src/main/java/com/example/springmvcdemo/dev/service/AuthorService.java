@@ -13,7 +13,7 @@ public interface AuthorService {
 
     AuthorDto getById(Integer id);
 
-    AuthorDto getByBookId(Integer id);
+    List<AuthorDto> getByBookId(Integer id);
 
     boolean delete(Integer id);
 }
