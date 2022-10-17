@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -51,10 +48,33 @@ public class BookController {
         modelAndView.addObject("category", category);
         modelAndView.addObject("bookNumber", bookService.countBook());
         modelAndView.addObject("booksByCategory", bookService.getBookByCategory(id));
+            return modelAndView;
+    }
+
+    @GetMapping(value = "/chi-tiet-sach/{id}")
+    public ModelAndView bookDetail(HttpSession httpSession, @PathVariable int id,
+                                   @RequestParam(value = "categoryId") int categoryId) {
+        if (id <= 0)
+            return new ModelAndView("redirect:/");
+
+        Object obj = httpSession.getAttribute("loginState");
+        boolean isLoggin = obj != null;
+
+        BookDto bookDto = bookService.getById(id);
+        if (bookDto == null)
+            return new ModelAndView("redirect:/");
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("user/book-detail");
+        modelAndView.addObject("isLoggin", isLoggin);
+        modelAndView.addObject("bookInfo", bookDto);
+        modelAndView.addObject("categoryId",  categoryId);
+        modelAndView.addObject("bookNumber",  bookService.countBook());
+        modelAndView.addObject("booksByCategory", bookService.getBookByCategory(categoryId));
         return modelAndView;
     }
 
-    @RequestMapping(value = "/chi-tiet-sach/{id}")
+    @GetMapping(value = "/chi-tiet-sach-{id}")
     public ModelAndView bookDetail(HttpSession httpSession, @PathVariable int id) {
         if (id <= 0)
             return new ModelAndView("redirect:/");
@@ -70,7 +90,8 @@ public class BookController {
         modelAndView.setViewName("user/book-detail");
         modelAndView.addObject("isLoggin", isLoggin);
         modelAndView.addObject("bookInfo", bookDto);
-        modelAndView.addObject("booksByCategory", bookService.getBookByCategory(bookDto.getCategory().getId()));
+        modelAndView.addObject("bookNumber", bookService.countBook());
+        modelAndView.addObject("booksByCategory", bookService.getBookByCategory(1));
         return modelAndView;
     }
 

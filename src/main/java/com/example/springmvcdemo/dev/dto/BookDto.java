@@ -30,8 +30,8 @@ public class BookDto extends BaseObjectDto {
     private int star;
     private String pdf;
     private String img;
-    private CategoryDto category;
     private AuthorDto author;
+    private CategoryDto category;
 
     public BookDto(Book entity) {
         this(entity, true);
@@ -52,12 +52,7 @@ public class BookDto extends BaseObjectDto {
                 this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), false);
             }
             if (simple) {
-                if (entity.getBookAuthors() != null && entity.getBookAuthors().size() > 0) {
-                    this.bookAuthorDtos = new ArrayList<>();
-                    for (BookAuthor item : entity.getBookAuthors()) {
-                        this.bookAuthorDtos.add(new BookAuthorDto(item));
-                    }
-                }
+
                 if (entity.getBookFeatureds() != null && entity.getBookFeatureds().size() > 0) {
                     this.bookFeatureds = new ArrayList<>();
                     for (BookFeatured item : entity.getBookFeatureds()) {
@@ -83,10 +78,10 @@ public class BookDto extends BaseObjectDto {
                 this.publishingHouse = new PublishingHouseDto(entity.getPublishingHouse(), true);
             }
             if (simple) {
-                if (entity.getBookAuthors() != null && entity.getBookAuthors().size() > 0) {
-                    this.bookAuthorDtos = new ArrayList<>();
-                    for (BookAuthor item : entity.getBookAuthors()) {
-                        this.bookAuthorDtos.add(new BookAuthorDto(item));
+                if (entity.getBookFeatureds() != null && entity.getBookFeatureds().size() > 0) {
+                    this.bookFeatureds = new ArrayList<>();
+                    for (BookFeatured item : entity.getBookFeatureds()) {
+                        this.bookFeatureds.add(new BookFeaturedDto(item));
                     }
                 }
             }

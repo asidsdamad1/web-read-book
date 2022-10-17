@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@include file="/WEB-INF/views/layouts/user/breadcrumb.jsp" %>
 
@@ -31,9 +32,14 @@
 							<div class="panel-body">
 								<div class="row">
 									<p>${ item.description }</p>
-									<a class="btn btn-success"
-										href="<c:url value="/sach-theo-the-loai/${ item.id }"></c:url>">Truy cập vào thể
-										loại</a>
+									<c:url var="get_url" value="/sach-theo-the-loai/${ item.id }"></c:url>
+									<form:form id="bookCategory" method="GET"
+											   action="${ get_url }">
+										<input id="categoryId" type="hidden" name="id" value="${ item.id }"/>
+										<button type="submit" style="cursor:pointer;" class="btn btn-success">Truy cập vào thể
+											loại</button>
+									</form:form>
+
 								</div>
 								<!-- /.row -->
 							</div>
@@ -50,3 +56,6 @@
 	</div>
 	<!-- /.container -->
 </div>
+<script>
+
+</script>

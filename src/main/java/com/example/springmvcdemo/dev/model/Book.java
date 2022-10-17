@@ -36,9 +36,6 @@ public class Book extends BaseObject{
     @JoinColumn(name = "publishingHouseId")
     private PublishingHouse publishingHouse;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<BookAuthor> bookAuthors;
-
     @OneToMany(mappedBy = "book",fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<BookFeatured> bookFeatureds;

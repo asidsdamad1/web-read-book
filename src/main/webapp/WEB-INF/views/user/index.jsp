@@ -47,7 +47,7 @@
 											<!-- /.slider-caption-heading -->
 											<div class="clearfix slider-price fadeInDown-3 hidden-xs">
 												<a class="btn btn-secondary btn-price"
-													href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">Truy
+													href="<c:url value="/chi-tiet-sach-${ item.id }"></c:url>">Truy
 													cập ngay</a>
 											</div>
 											<!-- /.slider-price -->
@@ -162,7 +162,7 @@
 													<div class="book-price">
 
 														<span class="price"> <a
-															href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">Xem
+															href="<c:url value="/chi-tiet-sach-${ item.id }"></c:url>">Xem
 																ngay</a>
 														</span>
 													</div>
@@ -176,7 +176,7 @@
 											<div class="book-details">
 												<h3 class="book-title" style="font-size: 16px;">
 													<a
-														href="<c:url value="/chi-tiet-sach/${ item.id }"></c:url>">${ item.name }</a>
+														href="<c:url value="/chi-tiet-sach-${ item.id }"></c:url>">${ item.name }</a>
 												</h3>
 												<div class="star-rating">
 													<c:forEach var="i" begin="1" end="${ item.star }">
@@ -254,7 +254,7 @@
 
 													<span class="price"> <span
 														class="price-before-discount"> <a
-															href="<c:url value="/chi-tiet-sach/${item.id }"></c:url>">Xem
+															href="<c:url value="/chi-tiet-sach-${item.id }"></c:url>">Xem
 																ngay</a>
 													</span>
 													</span>
@@ -268,7 +268,7 @@
 
 										<div class="book-details">
 											<h3 class="book-title" style="font-size: 16px;">
-												<a href="<c:url value="/chi-tiet-sach/${item.id }"></c:url>">${ item.name }</a>
+												<a href="<c:url value="/chi-tiet-sach-${item.id }"></c:url>">${ item.name }</a>
 											</h3>
 											<div class="star-rating">
 												<c:forEach var="i" begin="1" end="${ item.star }">

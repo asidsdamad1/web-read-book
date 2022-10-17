@@ -1,6 +1,7 @@
 package com.example.springmvcdemo.dev.service.Impl;
 
 import com.example.springmvcdemo.dev.dto.BookDto;
+import com.example.springmvcdemo.dev.dto.BookFeaturedDto;
 import com.example.springmvcdemo.dev.dto.RatingDto;
 import com.example.springmvcdemo.dev.model.*;
 import com.example.springmvcdemo.dev.repository.*;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,7 +70,6 @@ public class BookServiceImpl implements BookService {
             List<BookFeatured> bookFeatures = new ArrayList<>();
             if (dto.getCategoryIds() != null && dto.getAuthorIds() != null) {
 
-
                 // add category follow to author in book featured
                 for (Integer i : dto.getAuthorIds()) {
                     Author author = authorRepository.findById(i).orElseThrow(null);
@@ -92,6 +93,12 @@ public class BookServiceImpl implements BookService {
                     entity.getBookFeatureds().clear();
                     entity.getBookFeatureds().addAll(bookFeatures);
                 }
+            }
+            if (id != null) {
+                List<BookFeatured> bookFeaturedList = bookFeaturedRepository.getBookFeaturedByBook(id);
+                entity.setBookFeatureds(bookFeaturedList);
+            } else {
+                entity.setBookFeatureds(bookFeatures);
             }
 
             entity = bookRepository.save(entity);
@@ -229,7 +236,7 @@ public class BookServiceImpl implements BookService {
         List<BookFeatured> bookFeatureds = bookFeaturedRepository.getBooksByCategory(id);
         List<Book> books = new ArrayList<>();
         for (BookFeatured bookFeatured : bookFeatureds) {
-            Book book = bookRepository.getById(bookFeatured.getId());
+            Book book = bookRepository.getById(bookFeatured.getBook().getId());
             books.add(book);
         }
         List<BookDto> bookDtos = new ArrayList<>();

@@ -15,4 +15,6 @@ public interface BookFeaturedRepository extends JpaRepository<BookFeatured, Inte
     @Query("select e from BookFeatured e where e.author.id = ?1")
     List<BookFeatured> getBookFeaturedByAuthor(Integer id);
 
+    @Query("select e from BookFeatured e where e.book.id = ?1")
+    List<BookFeatured> getBookFeaturedByBook(Integer id);
 }

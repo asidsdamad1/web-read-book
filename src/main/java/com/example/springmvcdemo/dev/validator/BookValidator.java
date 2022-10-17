@@ -19,13 +19,13 @@ public class BookValidator implements Validator {
         if(book.getName().trim().length() < 3 || book.getName().trim().length() > 50)
             errors.rejectValue("name", "", "Tên sách phải có độ dài lớn hơn 3 và nhỏ hơn 50 ký tự");
 
-        if(book.getCategoryIds().isEmpty()) {
-            errors.rejectValue("category", "", "Thể loại không được để trống");
-        }
-
-        if(book.getAuthorIds().isEmpty()) {
-            errors.rejectValue("author", "", "Tác giả không được để trống");
-        }
+//        if(book.getCategoryIds().isEmpty()) {
+//            errors.rejectValue("category", "", "Thể loại không được để trống");
+//        }
+//
+//        if(book.getAuthorIds().isEmpty()) {
+//            errors.rejectValue("author", "", "Tác giả không được để trống");
+//        }
 
 
         if(book.getPublishingHouse() == null)

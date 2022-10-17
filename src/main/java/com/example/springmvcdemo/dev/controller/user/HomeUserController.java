@@ -1,8 +1,10 @@
 package com.example.springmvcdemo.dev.controller.user;
 
+import com.example.springmvcdemo.dev.service.AnalystService;
 import com.example.springmvcdemo.dev.service.BookService;
 import com.example.springmvcdemo.dev.service.CategoryService;
 import com.example.springmvcdemo.dev.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeUserController {
     private final BookService bookService;
-
     private final CategoryService categoryService;
-
     private final UserService userService;
-
-    public HomeUserController(BookService bookService, CategoryService categoryService, UserService userService) {
-        this.bookService = bookService;
-        this.categoryService = categoryService;
-        this.userService = userService;
-    }
 
     @RequestMapping(value = {"/", "/trang-chu"}, method = RequestMethod.GET)
     public ModelAndView index(HttpSession httpSession) {
@@ -41,6 +36,7 @@ public class HomeUserController {
 
         modelAndView.addObject("isLogged", isLogged);
         modelAndView.addObject("isAdmin", isAdmin);
+        modelAndView.addObject("bookNumber", bookService.countBook());
         modelAndView.addObject("lastestBooks", bookService.getLastestBooks(10));
         modelAndView.addObject("booksByViews", bookService.getBookByViews(10));
         return modelAndView;

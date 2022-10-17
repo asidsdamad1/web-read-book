@@ -103,7 +103,7 @@ public class ManageBookController {
         if (LoginServiceImpl.login(httpSession) != null)
             return LoginServiceImpl.login(httpSession);
 
-        bookValidator.validate(book, bindingResult);
+       bookValidator.validate(book, bindingResult);
 
         if (bindingResult.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView();
@@ -140,6 +140,7 @@ public class ManageBookController {
         modelAndView.addObject("username", username);
         modelAndView.addObject("book", bookDto);
         modelAndView.addObject("publishingHouses", publishingHouseService.getAll());
+        modelAndView.addObject("bookFeatures", bookDto.getBookFeatureds());
         if (message != null) {
             if (message.equals("edit-success"))
                 modelAndView.addObject("state", "Chỉnh sửa thành công");

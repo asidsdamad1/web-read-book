@@ -55,9 +55,9 @@
                         <td>
                             <ul>
                                 <c:forEach var="item" items="${ bookInfo.bookFeatureds }">
-									<c:if test="${item.author != null}">
-                                    	<li>${ item.author.name }</li>
-									</c:if>
+                                    <c:if test="${item.author != null}">
+                                        <li>${ item.author.name }</li>
+                                    </c:if>
                                 </c:forEach>
                             </ul>
                         </td>
@@ -100,16 +100,17 @@
     </div>
     <div class="card-footer">
         <a class="btn btn-primary"
-           href="<c:url value="/quan-tri/danh-sach-sach"></c:url>">Quay về
-            danh sách</a> | <a class="btn btn-success"
-                               href="<c:url value="/quan-tri/chinh-sua-sach/${ bookInfo.id }"></c:url>">Chỉnh
-        sửa</a> | <a class="btn btn-success"
-                     href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ bookInfo.id }"></c:url>">Hình
-        ảnh</a> | <a class="btn btn-success"
-                     href="<c:url value="/quan-tri/pdf-cua-sach/${ bookInfo.id }"></c:url>">PDF</a>
+           href="<c:url value="/quan-tri/danh-sach-sach"></c:url>">Quay về danh sách</a>
         | <a class="btn btn-success"
-             href="<c:url value="/quan-tri/tac-gia-cua-sach/${ bookInfo.id }"></c:url>">Tác
-        giả</a>
+             href="<c:url value="/quan-tri/chinh-sua-sach/${ bookInfo.id }"></c:url>">Chỉnh sửa</a>
+        | <a class="btn btn-success"
+             href="<c:url value="/quan-tri/hinh-anh-cua-sach/${ bookInfo.id }"></c:url>">Hình ảnh</a>
+        | <a class="btn btn-success"
+             href="<c:url value="/quan-tri/pdf-cua-sach/${ bookInfo.id }"></c:url>">PDF</a>
+        | <a class="btn btn-success"
+             href="<c:url value="/quan-tri/tac-gia-cua-sach/${ bookInfo.id }"></c:url>">Tác giả</a>
+        | <a class="btn btn-success"
+             href="<c:url value="/quan-tri/the-loai-cua-sach/${ bookInfo.id }"></c:url>">Thể loại</a>
     </div>
 </div>
 
@@ -124,6 +125,7 @@
     </style>
 
     <script type="text/javascript">
+
         //If absolute URL from the remote server is provided, configure the CORS
         //header on that server.
         var url = "<c:url value="/file-upload/pdfs/${ bookInfo.pdf }"></c:url>";
